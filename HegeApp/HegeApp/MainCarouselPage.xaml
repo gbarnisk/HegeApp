@@ -9,11 +9,15 @@
         </ContentPage.Content>
     </ContentPage>
     
-    <ContentPage BackgroundColor="Red">
+    <ContentPage BackgroundColor="Purple">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="Will is the best">
-                </Label>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Button Text="Hegemonocle Issue 2 Spring 2018: Life on the Hege"
+        BackgroundColor="Navy"
+        BorderRadius="10"
+        BorderWidth="2"
+        BorderColor="Black"
+        HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
