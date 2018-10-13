@@ -2,13 +2,16 @@
 
 <!--Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
     Defines a page filled by a CustomWebView component.-->
-    
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HegeApp.Models"
              x:Class="HegeApp.WebViewPage"
              Padding="0,0,0,0">
     <ContentPage.Content>
-        <local:CustomWebView Uri="" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <StackLayout>
+            <!--Label Text="Things are functioning" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" /-->
+            <local:CustomWebView Uri="life_on_the_hege.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

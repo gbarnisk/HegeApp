@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
+/*
+ * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
+ * A custom WebView with a Uri property for loading files
+ */
+
 namespace HegeApp.Models
 {
-    class CustomWebView : WebView
-    //Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
+    public class CustomWebView : WebView
     {
         public static readonly BindableProperty UriProperty = BindableProperty.Create(propertyName: "Uri",
             returnType: typeof(string),
@@ -16,6 +20,6 @@ namespace HegeApp.Models
         public string Uri {
             get { return (string)GetValue(UriProperty); }
             set { SetValue(UriProperty, value); }
-        } //Custom getter and setter for the Uri property
+        }
     }
 }

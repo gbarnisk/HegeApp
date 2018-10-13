@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+/*
+ * Controlling cs file for PDFView.
+ */
+
 namespace HegeApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
