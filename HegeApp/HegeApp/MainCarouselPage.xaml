@@ -3,8 +3,12 @@
     <ContentPage BackgroundColor="Maroon">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="Nathan is the best">
-                </Label>
+                <Button Text="Hegemonocle Issue 2 Fall 2018: The Last Minute Issue"
+        BackgroundColor="Navy"
+        BorderRadius="10"
+        BorderWidth="2"
+        BorderColor="Black"
+        HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -25,8 +29,12 @@
     <ContentPage BackgroundColor="Teal">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="We are both the best">
-                </Label>
+                <Button Text="Hegemonocle Issue 1 Spring 2018: The Hege gets a Job"
+        BackgroundColor="Navy"
+        BorderRadius="10"
+        BorderWidth="2"
+        BorderColor="Black"
+        HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
