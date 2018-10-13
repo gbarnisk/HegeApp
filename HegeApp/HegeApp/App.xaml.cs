@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HegeApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace HegeApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new PDFView(); //Boots to PDF View page
         }
 
         protected override void OnStart()
