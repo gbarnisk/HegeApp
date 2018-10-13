@@ -12,12 +12,12 @@
         </ContentPage.Content>
     </ContentPage>
     
-         <ContentPage BackgroundColor="Fuchsia">
+    <ContentPage BackgroundColor="Fuchsia">
         <ContentPage.Content>
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+`           <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="Will is the best">
                 </Label>
-             </StackLayout>
+            </StackLayout>
         </ContentPage.Content>
     </ContentPage>
 </CarouselPage>
