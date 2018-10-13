@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HegeApp"
              x:Class="HegeApp.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
-
-</ContentPage>
+     <ContentPage BackgroundColor="Navy">
+        <ContentPage.Content>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Nathan is the best">
+                </Label>
+             </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+    
+         <ContentPage BackgroundColor="Fuchsia">
+        <ContentPage.Content>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Will is the best">
+                </Label>
+             </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+</CarouselPage>
