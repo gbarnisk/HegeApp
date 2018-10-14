@@ -5,11 +5,11 @@
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Image x:Name="MyImage" />
                 <Button Text="Hegemonocle Issue 2 Fall 2018: The Last Minute Issue"
-        BackgroundColor="Navy"
-        BorderRadius="10"
-        BorderWidth="2"
-        BorderColor="Black"
-        HorizontalOptions="Center"/>
+                    BackgroundColor="Navy"
+                    BorderRadius="10"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -17,13 +17,13 @@
     <ContentPage BackgroundColor="Purple">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image x:Name="MyImage2" />
+                <Image x:Name="MyImage2"/>
                 <Button Text="Hegemonocle Issue 2 Spring 2018: Life on the Hege"
-        BackgroundColor="Navy"
-        BorderRadius="10"
-        BorderWidth="2"
-        BorderColor="Black"
-        HorizontalOptions="Center"/>
+                    BackgroundColor="Navy"
+                    BorderRadius="10"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -33,11 +33,11 @@
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Image x:Name="MyImage3"/>
                 <Button Text="Hegemonocle Issue 1 Spring 2018: The Hege gets a Job"
-        BackgroundColor="Navy"
-        BorderRadius="10"
-        BorderWidth="2"
-        BorderColor="Black"
-        HorizontalOptions="Center"/>
+                    BackgroundColor="Navy"
+                    BorderRadius="10"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
