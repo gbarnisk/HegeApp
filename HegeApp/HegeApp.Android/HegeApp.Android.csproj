@@ -365,6 +365,8 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\Life_on_the_hege.png" />
+    <AndroidResource Include="Resources\drawable\The_Hege_gets_a_job.png" />
+    <AndroidResource Include="Resources\drawable\The_Last_Minute_Issue.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

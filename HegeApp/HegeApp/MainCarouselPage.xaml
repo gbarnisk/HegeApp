@@ -17,6 +17,7 @@
     <ContentPage BackgroundColor="Purple">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Image x:Name="MyImage2" />
                 <Button Text="Hegemonocle Issue 2 Spring 2018: Life on the Hege"
         BackgroundColor="Navy"
         BorderRadius="10"
@@ -30,6 +31,7 @@
     <ContentPage BackgroundColor="Teal">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image x:Name="MyImage3"/>
                 <Button Text="Hegemonocle Issue 1 Spring 2018: The Hege gets a Job"
         BackgroundColor="Navy"
         BorderRadius="10"

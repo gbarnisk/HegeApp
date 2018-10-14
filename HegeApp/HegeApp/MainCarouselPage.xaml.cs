@@ -11,6 +11,9 @@ namespace HegeApp
         {
             InitializeComponent();
             MyImage.Source = ImageSource.FromFile("Life_on_the_hege.png");
+            MyImage2.Source = ImageSource.FromFile("The_Hege_gets_a_job.png");
+            MyImage3.Source = ImageSource.FromFile("The_Last_Minute_Issue.png");
+
         }
     }
 }
