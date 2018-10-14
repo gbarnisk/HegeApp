@@ -11,9 +11,9 @@ namespace HegeApp
         public App()
         {
             InitializeComponent();
-
-            MainPage = new PDFView(); //Boots to PDF View page
-			//MainPage = new MainCarouselPage();
+            //Only one of the below should be uncommented
+            //MainPage = new PDFView(); //Boots to PDF View page
+			MainPage = new MainCarouselPage(); //Boots to Carousel
 		}
         protected override void OnStart()
         {

@@ -10,6 +10,7 @@ namespace HegeApp
         public MainCarouselPage()
         {
             InitializeComponent();
+            MyImage.Source = ImageSource.FromFile("Life_on_the_hege.png");
         }
     }
 }

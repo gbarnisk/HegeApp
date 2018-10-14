@@ -3,6 +3,7 @@
     <ContentPage BackgroundColor="Maroon">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image x:Name="MyImage" />
                 <Button Text="Hegemonocle Issue 2 Fall 2018: The Last Minute Issue"
         BackgroundColor="Navy"
         BorderRadius="10"

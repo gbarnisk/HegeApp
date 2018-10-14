@@ -364,6 +364,7 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable\Life_on_the_hege.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -374,7 +375,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HegeApp\HegeApp.csproj">
-      <Project>{41F53990-07F9-479E-A53A-6FC5EBD268B6}</Project>
+      <Project>{D732E036-8101-4484-9CCB-77147A1877D8}</Project>
       <Name>HegeApp</Name>
     </ProjectReference>
   </ItemGroup>
