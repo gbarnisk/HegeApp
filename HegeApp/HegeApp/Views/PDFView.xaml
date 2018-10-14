@@ -4,14 +4,11 @@
     Defines a page filled by a CustomWebView component.-->
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HegeApp.Models"
-             x:Class="HegeApp.WebViewPage"
-             Padding="0,0,0,0">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:HegeApp.Models;assembly=HegeApp"
+             x:Class="HegeApp.Views.PDFView"
+			 Padding="0,20,0,0">
     <ContentPage.Content>
-        <StackLayout>
-            <!--Label Text="Things are functioning" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" /-->
-            <local:CustomWebView Uri="life_on_the_hege.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-        </StackLayout>
+        <local:CustomWebView Uri="life-on-the-hege.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
     </ContentPage.Content>
 </ContentPage>

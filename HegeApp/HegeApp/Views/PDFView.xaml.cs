@@ -20,11 +20,5 @@ namespace HegeApp.Views
         {
             InitializeComponent();
         }
-
-        //This method is apparently not being found properly. It appears to not do anything, so I have created this empty method to remove the error.
-        //TODO: figure out what the heck InitializeComponent is and fix this properly
-        private void InitializeComponent()
-        {
-        }
     }
 }

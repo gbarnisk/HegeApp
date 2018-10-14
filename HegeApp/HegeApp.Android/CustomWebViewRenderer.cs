@@ -25,12 +25,6 @@ namespace HegeApp.Droid
 {
     public class CustomWebViewRenderer : WebViewRenderer
     {
-        //Included from https://forums.xamarin.com/discussion/106938/context-is-obsolete-as-of-version-2-5 to address an error
-        public CustomWebViewRenderer(Context context) : base(context)
-        {
-
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<WebView> e)
         {
             base.OnElementChanged(e);
@@ -39,9 +33,7 @@ namespace HegeApp.Droid
             {
                 var customWebView = Element as CustomWebView;
                 Control.Settings.AllowUniversalAccessFromFileURLs = true;
-                Control.LoadUrl(string.Format("file:///android_asset/pdfjs/web/viewer.html?file={0}",
-                    string.Format("file:///android_asset/Content/{0}",
-                    WebUtility.UrlEncode(customWebView.Uri))));
+                Control.LoadUrl(string.Format("file:///android_asset/pdfjs/web/viewer.html?file={0}", string.Format("file:///android_asset/Content/{0}", WebUtility.UrlEncode(customWebView.Uri))));
             }
         }
     }
