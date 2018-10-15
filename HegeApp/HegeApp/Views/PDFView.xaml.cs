@@ -18,7 +18,7 @@ namespace HegeApp.Views
     {
         public PDFView()
         {
-            InitializeComponent();
+            //IntializeComponent();
         }
     }
 }
