@@ -9,7 +9,9 @@
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    Clicked="Handle_Clicked"                       />
+                    
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -23,7 +25,8 @@
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    Clicked="Handle_Clicked_1"    />
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -37,7 +40,8 @@
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    Clicked="Handle_Clicked_2"/>
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
