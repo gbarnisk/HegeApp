@@ -142,6 +142,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\The_Last_Minute_Issue.png" />
+    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\The_Hege_gets_a_job.png" />
+    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Life_on_the_hege.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -155,8 +161,13 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\HegeApp\HegeApp.csproj">
-      <Project>{41F53990-07F9-479E-A53A-6FC5EBD268B6}</Project>
+      <Project>{D732E036-8101-4484-9CCB-77147A1877D8}</Project>
       <Name>HegeApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\" />
+    <Folder Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\" />
+    <Folder Include="Assets.xcassets\Life_on_the_hege.png.imageset\" />
   </ItemGroup>
 </Project>
