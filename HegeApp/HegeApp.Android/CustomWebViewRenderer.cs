@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using System.Net;
+using HegeApp;
+using HegeApp.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using HegeApp.Droid;
-using System.Net;
-using HegeApp;
 
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
@@ -25,11 +14,6 @@ namespace HegeApp.Droid
 {
     public class CustomWebViewRenderer : WebViewRenderer
     {
-        public CustomWebViewRenderer(Context context) : base(context)
-        {
-            AutoPackage = false;
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<WebView> e)
         {
             base.OnElementChanged(e);

@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -11,8 +10,8 @@ namespace HegeApp
         {
             InitializeComponent();
             //Only one of the below should be uncommented
-            //MainPage = new WebViewPage(); //Boots to PDF View page
-			MainPage = new MainCarouselPage(); //Boots to Carousel
+            MainPage = new PDFViewPage(); //Boots to PDF View page
+			//MainPage = new MainCarouselPage(); //Boots to Carousel
 		}
         protected override void OnStart()
         {

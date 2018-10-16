@@ -342,7 +342,8 @@
     <AndroidAsset Include="Assets\pdfjs\web\locale\zh-CN\viewer.properties" />
     <AndroidAsset Include="Assets\pdfjs\web\locale\zh-TW\viewer.properties" />
     <AndroidAsset Include="Assets\pdfjs\web\locale\zu\viewer.properties" />
-    <None Include="Assets\Content\life_on_the_hege.pdf" />
+    <AndroidAsset Include="Assets\Content\BookPreview2-Ch18-Rel0417.pdf" />
+    <None Include="Assets\Content\hege.pdf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -373,7 +374,6 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
-    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HegeApp\HegeApp.csproj">

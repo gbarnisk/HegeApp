@@ -142,12 +142,24 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\The_Last_Minute_Issue.png" />
-    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\The_Hege_gets_a_job.png" />
-    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Life_on_the_hege.png" />
+    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\The_Last_Minute_Issue.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\The_Hege_gets_a_job.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Life_on_the_hege.png.imageset\Life_on_the_hege.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HegeApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class WebViewPage : ContentPage
+	public partial class PDFViewPage : ContentPage
 	{
-		public WebViewPage ()
+		public PDFViewPage ()
 		{
 			InitializeComponent ();
 		}

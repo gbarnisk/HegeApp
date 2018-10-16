@@ -18,17 +18,10 @@
     <EmbeddedResource Remove="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="SelectorPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WebViewPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />
@@ -37,5 +30,10 @@
     <Compile Update="MainCarouselPage.xaml.cs">
       <DependentUpon>MainCarouselPage.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="PDFViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
