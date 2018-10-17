@@ -16,5 +16,16 @@ namespace HegeApp
 		{
 			InitializeComponent ();
 		}
+
+        private void ScreenSwitchPressed(object sender, EventArgs e)
+        {
+            PDFWebView = new CustomWebView
+            {
+                Uri = "hege.pdf",
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+
+            };
+        }
 	}
 }

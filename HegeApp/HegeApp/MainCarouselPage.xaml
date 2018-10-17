@@ -10,7 +10,7 @@
                     BorderWidth="2"
                     BorderColor="Black"
                     HorizontalOptions="Center"
-                    Clicked="Handle_Clicked"                       />
+                    Clicked="Handle_Clicked_0"                       />
                     
             </StackLayout>
         </ContentPage.Content>

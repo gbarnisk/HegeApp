@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.ComponentModel;
+using System.Net;
+using Android.Content;
+using Android.Util;
 using HegeApp;
 using HegeApp.Droid;
 using Xamarin.Forms;
@@ -14,6 +18,12 @@ namespace HegeApp.Droid
 {
     public class CustomWebViewRenderer : WebViewRenderer
     {
+        //Included from https://forums.xamarin.com/discussion/106938/context-is-obsolete-as-of-version-2-5 to address a minor error.
+        public CustomWebViewRenderer(Context context) : base(context)
+        {
+            AutoPackage = false;
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<WebView> e)
         {
             base.OnElementChanged(e);

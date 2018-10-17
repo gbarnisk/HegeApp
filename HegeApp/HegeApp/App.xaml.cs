@@ -9,9 +9,7 @@ namespace HegeApp
         public App()
         {
             InitializeComponent();
-            //Only one of the below should be uncommented
-            MainPage = new PDFViewPage(); //Boots to PDF View page
-			//MainPage = new MainCarouselPage(); //Boots to Carousel
+			MainPage = new MainCarouselPage(); //Boots to Carousel
 		}
         protected override void OnStart()
         {

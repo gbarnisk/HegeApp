@@ -6,8 +6,9 @@
 			 Padding="0,0,0,0">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Switch" HorizontalOptions="Center"/>
-            <local:CustomWebView Uri="BookPreview2-Ch18-Rel0417.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <Button x:Name="ScreenSwitchButton" Pressed="ScreenSwitchPressed" Text="Switch" HorizontalOptions="Center"/>
+            <Label x:Name="TestText" Text="" HorizontalOptions="Center"/>
+            <local:CustomWebView x:Name="PDFWebView" Uri="BookPreview2-Ch18-Rel0417.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
