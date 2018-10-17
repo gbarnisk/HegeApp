@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -9,8 +9,8 @@ namespace HegeApp
         public App()
         {
             InitializeComponent();
-			MainPage = new MainCarouselPage(); //Boots to Carousel
-		}
+            MainPage = new MainCarouselPage(); //Boots to Carousel
+        }
         protected override void OnStart()
         {
             // Handle when your app starts
