@@ -19,19 +19,19 @@ namespace HegeApp
         void Handle_Clicked_0(object sender, System.EventArgs e)
         {
             //throw new NotImplementedException();
-            Navigation.PushModalAsync(new PDFViewPageCS("hege0.pdf"));
+            Navigation.PushModalAsync(new PDFViewPageCS("test1.pdf"));
         }
 
         void Handle_Clicked_1(object sender, System.EventArgs e)
         {
             //throw new NotImplementedException();
-            Navigation.PushModalAsync(new PDFViewPageCS("hege1.pdf"));
+            Navigation.PushModalAsync(new PDFViewPageCS("hege.pdf"));
         }
 
         void Handle_Clicked_2(object sender, System.EventArgs e)
         {
             //throw new NotImplementedException();
-            Navigation.PushModalAsync(new PDFViewPageCS("hege2.pdf"));
+            Navigation.PushModalAsync(new PDFViewPageCS("BookPreview2-Ch18-Rel0417.pdf"));
         }
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HegeApp.MainCarouselPage">
-    <ContentPage BackgroundColor="Maroon">
+    <ContentPage BackgroundColor="White">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Image x:Name="MyImage" />
                 <Button Text="Hegemonocle Issue 1 Spring 2018: The Hege gets a Job"
-                    BackgroundColor="Navy"
+                    BackgroundColor="LightGray"
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
@@ -16,12 +16,12 @@
         </ContentPage.Content>
     </ContentPage>
     
-    <ContentPage BackgroundColor="Purple">
+    <ContentPage BackgroundColor="White">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Image x:Name="MyImage2"/>
                 <Button Text="Hegemonocle Issue 2 Spring 2018: Life on the Hege"
-                    BackgroundColor="Navy"
+                    BackgroundColor="LightGray"
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
@@ -31,12 +31,12 @@
         </ContentPage.Content>
     </ContentPage>
     
-    <ContentPage BackgroundColor="Teal">
+    <ContentPage BackgroundColor="White">
         <ContentPage.Content>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Image x:Name="MyImage3"/>
                 <Button Text="Hegemonocle Issue 2 Fall 2018: The Last Minute Issue"
-                    BackgroundColor="Navy"
+                    BackgroundColor="LightGray"
                     BorderRadius="10"
                     BorderWidth="2"
                     BorderColor="Black"
