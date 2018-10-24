@@ -2,11 +2,10 @@
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HegeApp.MainCarouselPage">
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Image x:Name="MyImage" />
-                <Button Text="Hegemonocle Issue 1 Spring 2018: The Hege gets a Job"
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Button Text="Has Image" Image="Life_on_the_hege.png"
                     BackgroundColor="LightGray"
-                    BorderRadius="10"
+                    BorderRadius="5"
                     BorderWidth="2"
                     BorderColor="Black"
                     HorizontalOptions="Center"
@@ -18,9 +17,8 @@
     
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image x:Name="MyImage2"/>
-                <Button Text="Hegemonocle Issue 2 Spring 2018: Life on the Hege"
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Button Text="Has Image" Image="The_Hege_gets_a_job.png"
                     BackgroundColor="LightGray"
                     BorderRadius="10"
                     BorderWidth="2"
@@ -33,14 +31,8 @@
     
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Image x:Name="MyImage3"/>
-                <Button Text="Hegemonocle Issue 2 Fall 2018: The Last Minute Issue"
-                    BackgroundColor="LightGray"
-                    BorderRadius="10"
-                    BorderWidth="2"
-                    BorderColor="Black"
-                    HorizontalOptions="Center"
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Button Text="Has Image" Image="The_Last_Minute_Issue.png"
                     Clicked="Handle_Clicked_2"/>
             </StackLayout>
         </ContentPage.Content>
