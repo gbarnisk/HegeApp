@@ -17,7 +17,8 @@
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -348,7 +349,6 @@
     <AndroidAsset Include="Assets\Content\Hege1.pdf" />
     <AndroidAsset Include="Assets\Content\Hege2.pdf" />
     <AndroidAsset Include="Assets\Content\Hege3.pdf" />
-    <AndroidAsset Include="Assets\Content\V17_I1.pdf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
