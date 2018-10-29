@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-
-using Foundation;
-using HegeApp.iOS;
+﻿using System.IO;
+using System.Net;   
 using HegeApp;
+using HegeApp.iOS;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+
+
+
 
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
  * Custom renderer for PDFs in webview for iOS.
  */
+
 
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
 namespace HegeApp.iOS
@@ -32,6 +31,7 @@ namespace HegeApp.iOS
             }
             if (e.OldElement != null)
             {
+                // Cleanup
             }
             if (e.NewElement != null)
             {
@@ -43,3 +43,6 @@ namespace HegeApp.iOS
         }
     }
 }
+
+
+

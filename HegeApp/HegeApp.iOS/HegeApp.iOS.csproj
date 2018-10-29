@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -13,8 +12,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>HegeApp.iOS</AssemblyName>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -97,6 +95,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Content\hege.pdf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -181,5 +180,11 @@
     <Folder Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\" />
     <Folder Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\" />
     <Folder Include="Assets.xcassets\Life_on_the_hege.png.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Content\BookPreview2-Ch18-Rel0417.pdf" />
+    <AndroidAsset Include="Content\Hege1.pdf" />
+    <AndroidAsset Include="Content\Hege2.pdf" />
+    <AndroidAsset Include="Content\Hege3.pdf" />
   </ItemGroup>
 </Project>

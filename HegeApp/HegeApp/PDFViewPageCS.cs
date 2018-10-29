@@ -21,10 +21,10 @@ namespace HegeApp
             {
                 Children =
                 {
-                    //new Label
-                    //{
-                    //    Text = uri
-                    //},
+                    new Label
+                    {
+                       Text = uri
+                    },
                     new CustomWebView
                     {
                         Uri = uri,
