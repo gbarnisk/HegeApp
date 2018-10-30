@@ -21,7 +21,7 @@ namespace HegeApp
         {
             PDFWebView = new CustomWebView
             {
-                Uri = "hege.pdf",
+                Uri = "Hege1.pdf",
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
 

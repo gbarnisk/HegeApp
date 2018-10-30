@@ -182,7 +182,6 @@
     <Folder Include="Assets.xcassets\Life_on_the_hege.png.imageset\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Content\BookPreview2-Ch18-Rel0417.pdf" />
     <AndroidAsset Include="Content\Hege1.pdf" />
     <AndroidAsset Include="Content\Hege2.pdf" />
     <AndroidAsset Include="Content\Hege3.pdf" />
