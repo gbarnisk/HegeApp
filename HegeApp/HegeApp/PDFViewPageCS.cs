@@ -16,7 +16,17 @@ namespace HegeApp
          */
         public PDFViewPageCS(string uri)
         {
-            Padding = new Thickness(0, 0, 0, 0);
+            Button dismissModal = new Button
+            {
+                Text = "Back",
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Fill,
+
+            };
+
+            dismissModal.Clicked += DismissModal_Clicked;
+
+            Padding = new Thickness(0, 100, 0, 0);
             Content = new StackLayout
             {
                 Children =
@@ -26,13 +36,24 @@ namespace HegeApp
                        Text = uri
                     },
                     new CustomWebView
+
                     {
                         Uri = uri,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.FillAndExpand
-                    }
+                    },
+
+                    dismissModal 
+
                 }
+
             };
         }
+
+        async void DismissModal_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
+
     }
 }
