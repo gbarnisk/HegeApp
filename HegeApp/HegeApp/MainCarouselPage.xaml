@@ -2,37 +2,40 @@
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HegeApp.MainCarouselPage">
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-                <Button Text="Has Image" Image="Life_on_the_hege.png"
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image  x:Name="MyImage"/>
+                <Button Text="Hege" 
                     BackgroundColor="LightGray"
-                    BorderRadius="5"
-                    BorderWidth="2"
-                    BorderColor="Black"
-                    HorizontalOptions="Center"
-                    Clicked="Handle_Clicked_0"                       />
-                    
+                    BorderRadius= "10"
+                    BorderWidth= "2"
+                    BorderColor= "Black"
+                    HorizontalOptions= "Center"
+                    VerticalOptions= "Center"
+                    Clicked="Handle_Clicked_1" />
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
     
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-                <Button Text="Has Image" Image="The_Hege_gets_a_job.png"
-                    BackgroundColor="LightGray"
-                    BorderRadius="10"
-                    BorderWidth="2"
-                    BorderColor="Black"
-                    HorizontalOptions="Center"
-                    Clicked="Handle_Clicked_1"    />
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image  x:Name="MyImage2"/>
+                <Button Text= "Hege" 
+                    BackgroundColor=" LightGray"
+                    BorderRadius= "10"
+                    BorderWidth= "2"
+                    BorderColor= "Black"
+                    HorizontalOptions= "Center"
+                    Clicked= "Handle_Clicked_1"    />
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
     
     <ContentPage BackgroundColor="White">
         <ContentPage.Content>
-            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-                <Button Text="Has Image" Image="The_Last_Minute_Issue.png"
+            <StackLayout HorizontalOptions ="Center" VerticalOptions="Center">
+               <Image  x:Name="MyImage3"/>
+                <Button Text= "Hege" 
                     Clicked="Handle_Clicked_2"/>
             </StackLayout>
         </ContentPage.Content>
