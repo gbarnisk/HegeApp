@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HegeApp.Models;
+using System;
 using Xamarin.Forms;
 
 /*
  * A programatic alternative to PDFViewPage.
  */
 
-namespace HegeApp
+namespace HegeApp.Views
 {
     class PDFViewPageCS : ContentPage
     {
@@ -26,15 +25,15 @@ namespace HegeApp
 
             dismissModal.Clicked += DismissModal_Clicked;
 
-            Padding = new Thickness(0, 100, 0, 0);
+            Padding = new Thickness(0, 0, 0, 0);
             Content = new StackLayout
             {
                 Children =
                 {
-                    new Label
-                    {
-                       Text = uri
-                    },
+                    //new Label
+                    //{
+                    //   Text = uri
+                    //},
                     new CustomWebView
 
                     {

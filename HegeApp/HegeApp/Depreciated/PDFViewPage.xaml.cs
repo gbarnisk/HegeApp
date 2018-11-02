@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using HegeApp.Models;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HegeApp
+namespace HegeApp.Depreciated
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PDFViewPage : ContentPage
@@ -27,5 +23,5 @@ namespace HegeApp
 
             };
         }
-	}
+    }
 }

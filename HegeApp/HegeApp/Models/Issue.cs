@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-/*
+﻿/*
  * An issue data type. Contains a name, a pdf uri, and a cover art uri.
  */
 

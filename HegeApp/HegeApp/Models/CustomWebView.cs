@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
  * A custom WebView with a Uri property for loading files
  */
 
-namespace HegeApp
+namespace HegeApp.Models
 {
     public class CustomWebView : WebView
     {

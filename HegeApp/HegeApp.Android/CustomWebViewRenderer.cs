@@ -1,10 +1,7 @@
-﻿using System;
-using System.ComponentModel;
-using System.Net;
+﻿using System.Net;
 using Android.Content;
-using Android.Util;
-using HegeApp;
 using HegeApp.Droid;
+using HegeApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
