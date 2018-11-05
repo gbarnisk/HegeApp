@@ -18,9 +18,9 @@ namespace HegeApp.Models
             this.pdfURI = pdfURI;
         }
 
-		public void downloadIssue (pdfURL filename) {
+		//public void downloadIssue (pdfURL filename) {
             //go to google drive and download a file, saving the uri to the object
-			print filename;
-    }
+		//print filename;
+   // }
 	}
 }
