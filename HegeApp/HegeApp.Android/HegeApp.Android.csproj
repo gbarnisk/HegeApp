@@ -50,9 +50,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="cloudrail-si-xamarin-android-sdk">
-      <HintPath>..\..\..\..\..\..\Downloads\cloudrail-si-xamarin-android-sdk.dll</HintPath>
-    </Reference>
-    <Reference Include="cloudrail-si-xamarin-android-sdk">
       <HintPath>..\..\..\..\..\..\..\Downloads\cloudrail-si-xamarin-android-sdk-master\cloudrail-si-xamarin-android-sdk.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -670,6 +667,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cloudrail-si-xamarin-android-sdk.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

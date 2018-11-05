@@ -12,7 +12,8 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>HegeApp.iOS</AssemblyName>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -183,13 +184,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\" />
-    <Folder Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\" />
     <Folder Include="Assets.xcassets\Life_on_the_hege.png.imageset\" />
+    <Folder Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\" />
+    <Folder Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Content\Hege1.pdf" />
     <BundleResource Include="Content\Hege2.pdf" />
     <BundleResource Include="Content\Hege3.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cloudrail-si-xamarin-ios-sdk.dll" />
   </ItemGroup>
 </Project>
