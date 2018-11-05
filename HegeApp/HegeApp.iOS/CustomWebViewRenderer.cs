@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using System.Net;   
-using HegeApp;
+using System.Net;
 using HegeApp.iOS;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using HegeApp.Models;
 
 
 
