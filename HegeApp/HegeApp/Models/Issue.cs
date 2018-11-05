@@ -9,6 +9,7 @@ namespace HegeApp.Models
         public string issueName { get; set; }
         public string coverURI { get; set; }
         public string pdfURI { get; set; }
+		public string pdfURL { get; set; }
 
         public Issue(string issueName, string coverURI, string pdfURI)
         {
@@ -16,5 +17,10 @@ namespace HegeApp.Models
             this.coverURI = coverURI;
             this.pdfURI = pdfURI;
         }
+
+		public void downloadIssue (pdfURL filename) {
+            //go to google drive and download a file, saving the uri to the object
+			print filename;
     }
+	}
 }

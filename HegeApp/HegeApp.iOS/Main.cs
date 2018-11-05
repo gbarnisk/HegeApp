@@ -17,6 +17,17 @@ namespace HegeApp.iOS
             // you can specify it here.
             UIApplication.Main(args, null, "AppDelegate");
             CRCloudRail.AppKey = "5bd9c18b16d0d558c940a685";
+            CRGoogleDrive Boy = new CRGoogleDrive(
+    Context context,
+    String clientIdentifier,
+    String clientSecret,
+    String redirectUri,
+    String state
+);
+			CRGoogleDrive service = new CRGoogleDrive(this,"[1016822824176-6ieibidk36rh7oucvalek1o0gqfv7bbs.apps.googleusercontent.com]", "", "com.companyname.HegeApp:/auth",someState );
+           			                                     );
+			service.useAdvancedAuthentication();
+			service.login();
         }
     }
 }
