@@ -18,10 +18,9 @@ namespace HegeApp.iOS
             UIApplication.Main(args, null, "AppDelegate");
             CRCloudRail.AppKey = "5bd9c18b16d0d558c940a685";
 
-			//CRGoogleDrive service = new CRGoogleDrive(this,"[1016822824176-6ieibidk36rh7oucvalek1o0gqfv7bbs.apps.googleusercontent.com]", "", "com.companyname.HegeApp:/auth",someState );
-           			                                     
-			//service.useAdvancedAuthentication();
-			//service.login();
+            CRGoogleDrive service = new CRGoogleDrive("[1016822824176-6ieibidk36rh7oucvalek1o0gqfv7bbs.apps.googleusercontent.com]", "", "com.companyname.HegeApp:/auth", "SomeState");	                                     
+            service.UseAdvancedAuthentication();
+			service.Login();
         }
     }
 }
