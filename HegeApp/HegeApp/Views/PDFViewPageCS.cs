@@ -26,9 +26,11 @@ namespace HegeApp.Views
             dismissModal.Clicked += DismissModal_Clicked;
 
             Padding = new Thickness(0, 0, 0, 0);
-            Content = new StackLayout
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                Children =
+                Content = new StackLayout
+                {
+                    Children =
                 {
                     //new Label
                     //{
@@ -42,11 +44,32 @@ namespace HegeApp.Views
                         VerticalOptions = LayoutOptions.FillAndExpand
                     },
 
-                    dismissModal 
+                    dismissModal
 
                 }
 
-            };
+                };
+            } else if (Device.RuntimePlatform == Device.Android)
+            {
+                Content = new StackLayout
+                {
+                    Children =
+                {
+                    //new Label
+                    //{
+                    //   Text = uri
+                    //},
+                    new CustomWebView
+
+                    {
+                        Uri = uri,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        VerticalOptions = LayoutOptions.FillAndExpand
+                    }
+                }
+
+                };
+            }
         }
 
         async void DismissModal_Clicked(object sender, EventArgs e)
