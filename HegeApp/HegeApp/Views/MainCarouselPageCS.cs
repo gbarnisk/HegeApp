@@ -27,7 +27,7 @@ namespace HegeApp.Views
                         Text = "Has Image",
                         Image = issues[i].coverURI,
                         BackgroundColor = Color.LightGray,
-                        BorderRadius = 5,
+                        CornerRadius = 5,
                         BorderWidth = 2,
                         BorderColor = Color.Black,
                         HorizontalOptions = LayoutOptions.Center
@@ -39,7 +39,7 @@ namespace HegeApp.Views
                         pdfURI = issues[i].pdfURI, //The button holds the pdf uri to pass to the pdf view page
                         Text = issues[i].issueName,
                         BackgroundColor = Color.LightGray,
-                        BorderRadius = 5,
+                        CornerRadius = 5,
                         BorderWidth = 2,
                         BorderColor = Color.Black,
                         HorizontalOptions = LayoutOptions.Center
