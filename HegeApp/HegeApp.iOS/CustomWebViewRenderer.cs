@@ -7,14 +7,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using HegeApp.Models;
 
-
-
-
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
  * Custom renderer for PDFs in webview for iOS.
  */
-
 
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
 namespace HegeApp.iOS

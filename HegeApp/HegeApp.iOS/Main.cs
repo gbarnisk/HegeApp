@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-using CloudRailSI;
+﻿using UIKit;
 
 namespace HegeApp.iOS
 {
@@ -16,7 +10,6 @@ namespace HegeApp.iOS
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
             UIApplication.Main(args, null, "AppDelegate");
-            CRCloudRail.AppKey = "5bd9c18b16d0d558c940a685";
         }
     }
 }

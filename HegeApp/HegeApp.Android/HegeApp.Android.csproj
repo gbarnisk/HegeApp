@@ -46,9 +46,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="cloudrail-si-xamarin-android-sdk">
-      <HintPath>..\..\..\..\..\..\Downloads\cloudrail-si-xamarin-android-sdk.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />

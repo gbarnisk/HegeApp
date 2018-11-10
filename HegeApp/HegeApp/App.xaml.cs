@@ -18,7 +18,6 @@ namespace HegeApp
             issueList.Add(new Issue("The_Last_Minute_Issue", "The_Last_Minute_Issue.png", "Hege3.pdf"));
 
             InitializeComponent();
-            //MainPage = new MainCarouselPage(); //Boots to Carousel
             MainPage = new MainCarouselPageCS(issueList); //Boots to the C# port of the carousel page.
         }
         protected override void OnStart()

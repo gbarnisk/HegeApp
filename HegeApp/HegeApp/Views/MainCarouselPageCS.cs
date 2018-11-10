@@ -13,81 +13,40 @@ namespace HegeApp.Views
     {
         public MainCarouselPageCS(List<Issue> issues)
         {
-            Boolean imageButtons = false; //Controls whether there are image buttons or dedicated buttons at the bottom.
-
             for (int i = 0; i < issues.Count; i++)
             {
-                CustomButton button;
-
-                if (imageButtons)
+                CustomButton button = new CustomButton
                 {
-                    button = new CustomButton
-                    {
-                        pdfURI = issues[i].pdfURI, //The button holds the pdf uri to pass to the pdf view page
-                        Text = "Has Image",
-                        Image = issues[i].coverURI,
-                        BackgroundColor = Color.LightGray,
-                        BorderRadius = 5,
-                        BorderWidth = 2,
-                        BorderColor = Color.Black,
-                        HorizontalOptions = LayoutOptions.Center
-                    };
-                } else
-                {
-                    button = new CustomButton
-                    {
-                        pdfURI = issues[i].pdfURI, //The button holds the pdf uri to pass to the pdf view page
-                        Text = issues[i].issueName,
-                        BackgroundColor = Color.LightGray,
-                        BorderRadius = 5,
-                        BorderWidth = 2,
-                        BorderColor = Color.Black,
-                        HorizontalOptions = LayoutOptions.Center
-                    };
-                }
+                    pdfURI = issues[i].pdfURI, //The button holds the pdf uri to pass to the pdf view page
+                    Text = issues[i].issueName,
+                    BackgroundColor = Color.LightGray,
+                    BorderWidth = 2,
+                    BorderColor = Color.Black,
+                    HorizontalOptions = LayoutOptions.Center
+                };
                 button.Clicked += Button_Clicked;
-
-                if (imageButtons)
-                {
-                    Children.Add(
-                        new ContentPage
+                
+                Children.Add(
+                    new ContentPage
+                    {
+                        Content = new StackLayout
                         {
-                            Content = new StackLayout
-                            {
-                                HorizontalOptions = LayoutOptions.Fill,
-                                VerticalOptions = LayoutOptions.Fill,
+                            HorizontalOptions = LayoutOptions.Fill,
+                            VerticalOptions = LayoutOptions.Fill,
 
-                                Children =
+                            Children =
+                            {
+                                new Image
                                 {
-                                    button
-                                }
+                                    Source = issues[i].coverURI,
+                                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                                    VerticalOptions = LayoutOptions.FillAndExpand
+                                },
+                                button
                             }
                         }
-                    );
-                } else
-                {
-                    Children.Add(
-                        new ContentPage
-                        {
-                            Content = new StackLayout
-                            {
-                                HorizontalOptions = LayoutOptions.Fill,
-                                VerticalOptions = LayoutOptions.Fill,
-
-                                Children =
-                                {
-                                    new Image
-                                    {
-                                        Source = issues[i].coverURI,
-                                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                                        VerticalOptions = LayoutOptions.FillAndExpand
-                                    },
-                                    button
-                                }
-                            }
-                        }
-                    );
-                }
+                    }
+                );
             }
         }
 
