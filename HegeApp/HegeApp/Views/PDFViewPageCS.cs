@@ -17,7 +17,7 @@ namespace HegeApp.Views
         {
             Button dismissModal = new Button
             {
-                Text = "Back",
+                Text = "Select Issue",
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Fill,
 
