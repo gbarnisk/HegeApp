@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HegeApp
 {
@@ -18,8 +19,11 @@ namespace HegeApp
             issueList.Add(new Issue("The_Last_Minute_Issue", "The_Last_Minute_Issue.png", "Hege3.pdf"));
 
             InitializeComponent();
+            System.Console.WriteLine("Hello World");
             MainPage = new MainCarouselPageCS(issueList); //Boots to the C# port of the carousel page.
         }
+
+
         protected override void OnStart()
         {
             // Handle when your app starts
