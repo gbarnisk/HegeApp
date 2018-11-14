@@ -20,7 +20,9 @@ namespace HegeApp
 
             InitializeComponent();
             System.Console.WriteLine("Hello World");
-            MainPage = new MainCarouselPageCS(issueList); //Boots to the C# port of the carousel page.
+            //MainPage = new MainCarouselPageCS(issueList); //Boots to the C# port of the carousel page.
+
+            MainPage = new TestPage();
         }
 
 
