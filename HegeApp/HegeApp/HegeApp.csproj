@@ -19,7 +19,6 @@
     <EmbeddedResource Remove="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>

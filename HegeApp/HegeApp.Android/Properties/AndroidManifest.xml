@@ -3,4 +3,5 @@
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
     <application android:label="HegeApp.Android"></application>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>

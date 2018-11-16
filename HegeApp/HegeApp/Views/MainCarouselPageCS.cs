@@ -1,4 +1,5 @@
-﻿using HegeApp.Models;
+﻿using HegeApp.Controllers;
+using HegeApp.Models;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -11,21 +12,42 @@ namespace HegeApp.Views
 {
     class MainCarouselPageCS : CarouselPage
     {
-        public MainCarouselPageCS(List<Issue> issues)
+        private IssueManager IssueManager;
+
+        public MainCarouselPageCS(IssueManager issueManager)
         {
-            for (int i = 0; i < issues.Count; i++)
+            this.IssueManager = issueManager;
+
+            for (int i = 0; i < issueManager.issueList.Count; i++)
             {
-                CustomButton button = new CustomButton
+                CustomButton viewButton = new CustomButton
                 {
-                    pdfURI = issues[i].pdfURI, //The button holds the pdf uri to pass to the pdf view page
-                    Text = issues[i].issueName,
+                    pdfURI = issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
+                    Text = issueManager.issueList[i].IssueName,
                     BackgroundColor = Color.LightGray,
                     BorderWidth = 2,
                     BorderColor = Color.Black,
-                    HorizontalOptions = LayoutOptions.Center
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
                 };
-                button.Clicked += Button_Clicked;
-                
+                viewButton.Clicked += ViewClicked;
+
+                Button downloadButton = new Button
+                {
+                    Text = "Download",
+                    BackgroundColor = Color.LightBlue,
+                    BorderWidth = 2,
+                    BorderColor = Color.Black,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
+                downloadButton.Clicked += DownloadClicked;
+
+                Label testlabel = new Label
+                {
+                    Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                };
+
                 Children.Add(
                     new ContentPage
                     {
@@ -42,7 +64,9 @@ namespace HegeApp.Views
                                     HorizontalOptions = LayoutOptions.FillAndExpand,
                                     VerticalOptions = LayoutOptions.FillAndExpand
                                 },*/ //There is an issue with android which is causing crashes when images are loaded.
-                                button
+                                viewButton,
+                                //downloadButton,
+                                //testlabel
                             }
                         }
                     }
@@ -50,11 +74,19 @@ namespace HegeApp.Views
             }
         }
 
-        //When the button is clicked, get the button's uri and load that
-        private void Button_Clicked(object sender, EventArgs e)
+        //When the view button is clicked, get the button's uri and load that
+        private void ViewClicked(object sender, EventArgs e)
         {
             CustomButton hackButton = (CustomButton)sender; //Yes there is a better way. I don't feel like learning how to do it.
             Navigation.PushModalAsync(new PDFViewPageCS(hackButton.pdfURI));
+        }
+
+        /*
+         * Downloads the issue into local memory when clicked
+         */
+        private void DownloadClicked(object sender, EventArgs e)
+        {
+            IssueManager.DownloadIssueAsync(0);
         }
     }
 }

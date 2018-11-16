@@ -6,15 +6,23 @@ namespace HegeApp.Models
 {
     class Issue
     {
-        public string issueName { get; set; }
-        public string coverURI { get; set; }
-        public string pdfURI { get; set; }
+        public string IssueName { get; set; }
+        public string CoverURL { get; set; }
+        public string CoverURI { get; set; }
+        public bool CoverLocal { get; set; } //Whether there is a local copy of the cover
+        public string PdfURL { get; set; }
+        public string PdfURI { get; set; }
+        public bool PdfLocal { get; set; } // Whether there is a local copy of the pdf
 
-        public Issue(string issueName, string coverURI, string pdfURI)
+        public Issue(string IssueName, string CoverURL, string CoverURI, bool CoverLocal, string PdfURL, string PdfURI, bool PdfLocal)
         {
-            this.issueName = issueName;
-            this.coverURI = coverURI;
-            this.pdfURI = pdfURI;
+            this.IssueName = IssueName;
+            this.CoverURL = CoverURL;
+            this.CoverURI = CoverURI;
+            this.CoverLocal = CoverLocal;
+            this.PdfURL = PdfURL;
+            this.PdfURI = PdfURI;
+            this.PdfLocal = PdfLocal;
         }
     }
 }
