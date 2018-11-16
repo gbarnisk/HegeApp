@@ -3,7 +3,7 @@ using HegeApp.Views;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using Plugin.DownloadManager;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HegeApp
@@ -19,7 +19,13 @@ namespace HegeApp
             issueList.Add(new Issue("The_Last_Minute_Issue", "The_Last_Minute_Issue.png", "Hege3.pdf"));
 
             InitializeComponent();
+
             System.Console.WriteLine("Hello World");
+
+            //var downloadManager = CrossDownloadManager.Current;
+            //var file = downloadManager.CreateDownloadFile("https://macalesterhegemonocle.files.wordpress.com/2018/11/v18_i2.pdf");
+            //downloadManager.Start(file);
+
             MainPage = new MainCarouselPageCS(issueList); //Boots to the C# port of the carousel page.
 
             //MainPage = new TestPage();

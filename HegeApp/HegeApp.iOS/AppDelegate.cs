@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using ObjCRuntime;
+using Plugin.DownloadManager;
 using UIKit;
 
 namespace HegeApp.iOS
@@ -26,6 +28,15 @@ namespace HegeApp.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        /*
+         * Based on code from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager 
+         */
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
+        {
+            base.HandleEventsForBackgroundUrl(application, sessionIdentifier, completionHandler);
+            CrossDownloadManager.BackgroundSessionCompletionHandler = completionHandler;
         }
     }
 }

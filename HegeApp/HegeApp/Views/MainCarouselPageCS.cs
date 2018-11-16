@@ -36,12 +36,12 @@ namespace HegeApp.Views
 
                             Children =
                             {
-                                new Image
+                                /*new Image
                                 {
                                     Source = issues[i].coverURI,
                                     HorizontalOptions = LayoutOptions.FillAndExpand,
                                     VerticalOptions = LayoutOptions.FillAndExpand
-                                },
+                                },*/ //There is an issue with android which is causing crashes when images are loaded.
                                 button
                             }
                         }
