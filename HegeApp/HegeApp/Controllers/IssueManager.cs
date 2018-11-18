@@ -4,6 +4,8 @@ using Plugin.DownloadManager.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -62,7 +64,15 @@ namespace HegeApp.Controllers
          */
         public void IndexToDrive()
         {
-            //Implement
+            WebClient wc = new WebClient();
+            using (Stream st = wc.OpenRead("https://macalesterhegemonocle.wordpress.com/2018/11/13/test/"))
+            {
+                using (StreamReader sr = new StreamReader(st, Encoding.UTF8))
+                {
+                    string  html = sr.ReadToEnd();
+                    Console.Write(html);
+                }
+            }
         }
 
         /*
