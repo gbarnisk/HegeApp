@@ -35,7 +35,6 @@ namespace HegeApp.Views
                     //   Text = uri
                     //},
                     new CustomWebView
-
                     {
                         Uri = uri,
                         HorizontalOptions = LayoutOptions.FillAndExpand,

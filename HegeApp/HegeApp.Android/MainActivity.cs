@@ -32,8 +32,13 @@ namespace HegeApp.Droid
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
                 string fileName = Android.Net.Uri.Parse(file.Url).Path.Split('/').Last();
-                return Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
+                string newPath = Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
+                System.Console.WriteLine("Here's the path");
+                System.Console.WriteLine(newPath);
+                return newPath;
             });
+
+            ///storage/emulated/0/Android/data/com.companyname.HegeApp/files/Download/v2_i1.pdf
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Foundation;
-using HegeApp.Models;
+﻿using HegeApp.Models;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using System;
