@@ -6,7 +6,7 @@ using Foundation;
 using ObjCRuntime;
 using Plugin.DownloadManager;
 using UIKit;
-
+using UserNotifications;
 namespace HegeApp.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -26,7 +26,11 @@ namespace HegeApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            // Request notification permissions from the user
+            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => {
+                // Handle approval
+            });
+            
             return base.FinishedLaunching(app, options);
         }
 
