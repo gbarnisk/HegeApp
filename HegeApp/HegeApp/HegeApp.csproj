@@ -25,6 +25,11 @@
     <Compile Remove="MainPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Depreciated\MainCarouselPage.xaml.cs">
       <DependentUpon>MainCarouselPage.xaml</DependentUpon>
     </Compile>

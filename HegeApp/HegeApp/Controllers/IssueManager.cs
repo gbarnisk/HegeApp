@@ -1,4 +1,5 @@
-﻿using HegeApp.Models;
+﻿using Foundation;
+using HegeApp.Models;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using System;
@@ -23,22 +24,6 @@ namespace HegeApp.Controllers
 
         public IssueManager()
         {
-            //Following from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager
-            /*CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
-            {
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    return Path.Combine();
-                }
-                else if (Device.RuntimePlatform == Device.iOS)
-                {
-                    return Path.Combine();
-                }
-                else
-                {
-                    return Path.Combine();
-                }
-            });*/
             downloadManager = CrossDownloadManager.Current;
 
             IndexToDrive();
@@ -52,7 +37,7 @@ namespace HegeApp.Controllers
         {
             //Temporary hardcoding:
             issueList = new List<Issue>();
-            issueList.Add(new Issue("Life on the Hege", "", "Life_on_the_hege.png", true, "", "Hege1.pdf", true));
+            issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
             issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
             issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
 

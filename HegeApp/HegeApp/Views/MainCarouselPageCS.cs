@@ -65,7 +65,7 @@ namespace HegeApp.Views
                                     VerticalOptions = LayoutOptions.FillAndExpand
                                 },*/ //There is an issue with android which is causing crashes when images are loaded.
                                 viewButton,
-                                //downloadButton,
+                                downloadButton,
                                 //testlabel
                             }
                         }
