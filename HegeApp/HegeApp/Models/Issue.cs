@@ -24,5 +24,13 @@ namespace HegeApp.Models
             this.PdfURI = PdfURI;
             this.PdfLocal = PdfLocal;
         }
+        /*
+         * This ToString method needs work; returning the booleans does not seem to want to work
+         */
+        public override string ToString(){
+            return (IssueName + "," + CoverURL + "," + CoverURI + "," + CoverLocal.ToString+ "," + 
+                    PdfURL + "," + PdfURI + "," + PdfLocal.ToString);
+        }
+
     }
 }

@@ -185,6 +185,7 @@
     <Folder Include="Assets.xcassets\Life_on_the_hege.png.imageset\" />
     <Folder Include="Assets.xcassets\The_Hege_gets_a_job.png.imageset\" />
     <Folder Include="Assets.xcassets\The_Last_Minute_Issue.png.imageset\" />
+    <Folder Include="New Folder\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Content\Hege1.pdf" />

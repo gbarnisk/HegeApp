@@ -1,4 +1,3 @@
-﻿
 using HegeApp.Models;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
@@ -47,6 +46,8 @@ namespace HegeApp.Controllers
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
          */
+
+
         public void IndexToDrive()
         {
             WebClient wc = new WebClient();
@@ -59,7 +60,52 @@ namespace HegeApp.Controllers
                 }
             }
         }
+        /*
+         * Saves an object into a textfile at a specified path
+         */
+        public void SaveToLocal(object issues, string filename)
+        {
+            Console.WriteLine("Saved to local started");
+            using (var streamWriter = new StreamWriter(filename, true))
+            {
+                Console.WriteLine(issues);
+                streamWriter.Write(issues);
+            }
 
+
+        }
+        /*
+         * reads a text file at a specified path and returns the content
+         * in the form of a list of issues
+         * Once IssueListFromString is completed, this should work
+         */
+        //public List<Issue> ReadFromLocal(string filename){
+        //    using (var streamReader = new StreamReader(filename))
+        //    {
+        //        var content = streamReader.ReadToEnd();
+        //        List<Issue> issues = IssueListFromString(content);
+        //        return issues;
+        //    }
+        //}
+        /*
+         * 
+         */
+        //public List<Issue> IssueListFromString (String issuetext){
+
+        //}
+    
+            
+        /*
+         * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
+         */
+        public void InitializeTextFile(List<Issue> issues)
+        {
+            Console.WriteLine(issues);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string filename = Path.Combine(path, "StoredIssues.txt");
+            SaveToLocal(issues, filename);
+
+        }
         /*
          * Downloads the issue from index into local storage. Using code from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager and https://stackoverflow.com/questions/43008813/xamarin-crossdownloadmanager-waiting-for-download-file
          */

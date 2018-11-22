@@ -1,4 +1,4 @@
-﻿using Foundation;
+using Foundation;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using System;
