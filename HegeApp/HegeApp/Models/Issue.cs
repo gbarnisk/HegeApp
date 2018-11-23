@@ -24,12 +24,26 @@ namespace HegeApp.Models
             this.PdfURI = PdfURI;
             this.PdfLocal = PdfLocal;
         }
+
         /*
-         * This ToString method needs work; returning the booleans does not seem to want to work
+         * returns a string of a boolean, for use in ToString
          */
+        public string BooleanStringer(bool b)
+        {
+            return b.Equals(true) ? "True" : "False";
+        }
+        /*
+         * String of an issue
+         */
+        
+
         public override string ToString(){
-            return (IssueName + "," + CoverURL + "," + CoverURI + "," + CoverLocal.ToString+ "," + 
-                    PdfURL + "," + PdfURI + "," + PdfLocal.ToString);
+            string SCover = BooleanStringer(CoverLocal);
+            string SIssue = BooleanStringer(PdfLocal);
+
+            string final =  IssueName + "," + CoverURL + "," + CoverURI + ","  + SCover + "," + 
+                PdfURL + "," + PdfURI + "," + SIssue;
+            return final;
         }
 
     }
