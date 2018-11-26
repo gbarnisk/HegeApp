@@ -132,6 +132,7 @@ public void SaveToLocal(object issues, string filename)
         {
             await Task.Run(async() =>
             {
+                System.Console.WriteLine("GRIFFIN'S DEBUG Download method reached");
                 IDownloadFile pdf = downloadManager.CreateDownloadFile(issueList[index].PdfURL);
                 downloadManager.Start(pdf);
                 bool isDownloading = true;
@@ -182,10 +183,14 @@ public void SaveToLocal(object issues, string filename)
                 case DownloadFileStatus.PAUSED:
                 case DownloadFileStatus.PENDING:
                 case DownloadFileStatus.RUNNING:
+                    System.Console.WriteLine("GRIFFIN'S DEBUG Download started");
                     return true;
                 case DownloadFileStatus.COMPLETED:
+                    System.Console.WriteLine("GRIFFIN'S DEBUG Download completed");
+                    return false;
                 case DownloadFileStatus.CANCELED:
                 case DownloadFileStatus.FAILED:
+                    System.Console.WriteLine("GRIFFIN'S DEBUG Download failed");
                     return false;
                 default:
                     throw new ArgumentOutOfRangeException();

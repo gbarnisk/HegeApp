@@ -86,6 +86,7 @@ namespace HegeApp.Views
          */
         private void DownloadClicked(object sender, EventArgs e)
         {
+            System.Console.WriteLine("GRIFFIN'S DEBUG Download button clicked");
             IssueManager.DownloadIssueAsync(0);
         }
     }

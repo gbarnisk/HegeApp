@@ -33,8 +33,7 @@ namespace HegeApp.Droid
             {
                 string fileName = Android.Net.Uri.Parse(file.Url).Path.Split('/').Last();
                 string newPath = Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
-                System.Console.WriteLine("Here's the path");
-                System.Console.WriteLine(newPath);
+                System.Console.WriteLine("GRIFFIN'S DEBUG File path: " + newPath);
                 return newPath;
             });
 

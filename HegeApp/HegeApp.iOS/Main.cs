@@ -20,6 +20,7 @@ namespace HegeApp.iOS
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
                 string fileName = (new NSUrl(file.Url, false)).LastPathComponent;
+                System.Console.WriteLine("GRIFFIN'S DEBUG File path: " + fileName);
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
             });
         }
