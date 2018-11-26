@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -48,22 +49,40 @@ namespace HegeApp.Controllers
          */
 
 
+       
         public void IndexToDrive()
         {
+
             WebClient wc = new WebClient();
             using (Stream st = wc.OpenRead("https://macalesterhegemonocle.wordpress.com/2018/11/13/test/"))
             {
                 using (StreamReader sr = new StreamReader(st, Encoding.UTF8))
                 {
-                    string  html = sr.ReadToEnd();
-                    Console.Write(html);
+                    string html = sr.ReadToEnd();
+
+                    Regex r = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
+
+                    foreach (Match match in r.Matches(html))
+                    {
+                        string url = match.Groups["href"].Value;
+                        string text = match.Groups["value"].Value;
+
+                        Console.WriteLine(url + text);
+                    }
+
+
+
                 }
             }
         }
-        /*
-         * Saves an object into a textfile at a specified path
-         */
-        public void SaveToLocal(object issues, string filename)
+    
+
+
+
+/*
+ * Saves an object into a textfile at a specified path
+ */
+public void SaveToLocal(object issues, string filename)
         {
             Console.WriteLine("Saved to local started");
             using (var streamWriter = new StreamWriter(filename, true))
