@@ -13,7 +13,7 @@ namespace HegeApp.Views
         /*
          * Takes a file name (uri) and constructs a pdf web view page accessing that file.
          */
-        public PDFViewPageCS(string uri)
+        public PDFViewPageCS(string uri, Issue issue)
         {
             Button dismissModal = new Button
             {
@@ -25,7 +25,7 @@ namespace HegeApp.Views
 
             dismissModal.Clicked += DismissModal_Clicked;
 
-            Padding = new Thickness(0, 0, 0, 0);
+            Padding = new Thickness(0, 20, 0, 10);
             Content = new StackLayout
             {
                 Children =
@@ -37,6 +37,7 @@ namespace HegeApp.Views
                     new CustomWebView
                     {
                         Uri = uri,
+                        Issue = issue,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.FillAndExpand
                     },

@@ -4,7 +4,7 @@
 
 namespace HegeApp.Models
 {
-    class Issue
+    public class Issue
     {
         public string IssueName { get; set; }
         public string CoverURL { get; set; }
@@ -12,7 +12,8 @@ namespace HegeApp.Models
         public bool CoverLocal { get; set; } //Whether there is a local copy of the cover
         public string PdfURL { get; set; }
         public string PdfURI { get; set; }
-        public bool PdfLocal { get; set; } // Whether there is a local copy of the pdf
+        public bool PdfLocal { get; set; } //Whether there is a local copy of the pdf
+        public string PdfPath { get; set; }
 
         public Issue(string IssueName, string CoverURL, string CoverURI, bool CoverLocal, string PdfURL, string PdfURI, bool PdfLocal)
         {
@@ -23,6 +24,7 @@ namespace HegeApp.Models
             this.PdfURL = PdfURL;
             this.PdfURI = PdfURI;
             this.PdfLocal = PdfLocal;
+            this.PdfPath = "";
         }
 
         /*
@@ -32,11 +34,10 @@ namespace HegeApp.Models
         {
             return b.Equals(true) ? "True" : "False";
         }
+
         /*
          * String of an issue
          */
-        
-
         public override string ToString(){
             string SCover = BooleanStringer(CoverLocal);
             string SIssue = BooleanStringer(PdfLocal);

@@ -11,6 +11,8 @@ namespace HegeApp
 {
     public partial class App : Application
     {
+        static IssueManager issueManager { get; set; }
+
         public App()
         {
             List<Issue> issueList= new List<Issue>();
@@ -25,7 +27,7 @@ namespace HegeApp
 
 
             //System.Console.WriteLine("Hello World");
-            IssueManager issueManager = new IssueManager();
+            issueManager = new IssueManager();
 
             //issueManager.InitializeTextFile(issueList);
             System.Console.WriteLine("Wow! It worked??");

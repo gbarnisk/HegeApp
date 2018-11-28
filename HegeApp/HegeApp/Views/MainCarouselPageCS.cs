@@ -12,7 +12,7 @@ namespace HegeApp.Views
 {
     class MainCarouselPageCS : CarouselPage
     {
-        private IssueManager IssueManager;
+        public IssueManager IssueManager;
 
         public MainCarouselPageCS(IssueManager issueManager)
         {
@@ -23,6 +23,7 @@ namespace HegeApp.Views
                 CustomButton viewButton = new CustomButton
                 {
                     pdfURI = issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
+                    Issue = issueManager.issueList[i],
                     Text = issueManager.issueList[i].IssueName,
                     BackgroundColor = Color.LightGray,
                     BorderWidth = 2,
@@ -51,6 +52,7 @@ namespace HegeApp.Views
                 Children.Add(
                     new ContentPage
                     {
+                        Padding = new Thickness(0, 20, 0, 0),
                         Content = new StackLayout
                         {
                             HorizontalOptions = LayoutOptions.Fill,
@@ -77,7 +79,7 @@ namespace HegeApp.Views
         private void ViewClicked(object sender, EventArgs e)
         {
             CustomButton hackButton = (CustomButton)sender; //Yes there is a better way. I don't feel like learning how to do it.
-            Navigation.PushModalAsync(new PDFViewPageCS(hackButton.pdfURI));
+            Navigation.PushModalAsync(new PDFViewPageCS(hackButton.pdfURI, hackButton.Issue));
         }
 
         /*

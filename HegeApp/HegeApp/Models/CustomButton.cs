@@ -14,5 +14,12 @@ namespace HegeApp.Models
             get { return (string)GetValue(pdfURIProperty); }
             set { SetValue(pdfURIProperty, value); }
         }
+
+        public static readonly BindableProperty IssueProperty = BindableProperty.Create<CustomButton, Issue>(p => p.Issue, default(Issue));
+        public Issue Issue
+        {
+            get { return (Issue)GetValue(IssueProperty); }
+            set { SetValue(IssueProperty, value); }
+        }
     }
 }
