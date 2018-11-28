@@ -26,12 +26,28 @@ namespace HegeApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            // Request notification permissions from the user
-            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => {
-                // Handle approval
-            });
-            
+            var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+);
+            app.RegisterUserNotificationSettings(notificationSettings);
+            UILocalNotification notification = new UILocalNotification();
+            NSDate.FromTimeIntervalSinceNow(30);
+            notification.AlertAction = "View Alert";
+            notification.AlertBody = "There is a new issue!";
+            UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+
             return base.FinishedLaunching(app, options);
+        }
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
+            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+            Window.RootViewController.PresentViewController(okayAlertController, true, null);
+
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
         }
 
         /*
