@@ -50,7 +50,7 @@ namespace HegeApp.Controllers
          */
 
 
-       
+
         public void IndexToDrive()
         {
 
@@ -67,12 +67,43 @@ namespace HegeApp.Controllers
                     {
                         string url = match.Groups["href"].Value;
                         string text = match.Groups["value"].Value;
+                        string combine = (url + text);
+                        string[] indexLink = Regex.Split(combine, @"(?<=[https])")
 
-                        Console.WriteLine(url + text);
+;
+
+                        if (url.Contains("pdf"))
+                        {
+
+                            foreach (var value in indexLink)
+                            {
+                                Console.WriteLine(value);
+                            }
+
+
+
+                        }
+
+
+
+                        foreach (Match match2 in r.Matches(html))
+                        {
+                            string words = match2.Groups["title"].Value;
+                            string text2 = match2.Groups["value"].Value;
+                            string combine2 = (words + text2);
+
+                            if (words.Contains("ISSUE"))
+                            {
+
+                                Console.WriteLine(combine2);
+
+                            }
+
+                        }
+
+
+
                     }
-
-
-
                 }
             }
         }
@@ -110,8 +141,8 @@ namespace HegeApp.Controllers
         //public List<Issue> IssueListFromString (String issuetext){
 
         //}
-    
-            
+
+
         /*
          * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
          */
@@ -128,7 +159,7 @@ namespace HegeApp.Controllers
          */
         public async Task DownloadIssueAsync(int index)
         {
-            await Task.Run(async() =>
+            await Task.Run(async () =>
             {
                 System.Console.WriteLine("GRIFFIN'S DEBUG Download method reached");
                 IDownloadFile pdf = downloadManager.CreateDownloadFile(issueList[index].PdfURL);
@@ -168,7 +199,7 @@ namespace HegeApp.Controllers
         /*
          * Checks if a file is still downloading. Uses code from https://stackoverflow.com/questions/43008813/xamarin-crossdownloadmanager-waiting-for-download-file
          */
-         bool IsDownloading(IDownloadFile file)
+        bool IsDownloading(IDownloadFile file)
         {
             if (file == null)
             {
@@ -196,3 +227,4 @@ namespace HegeApp.Controllers
         }
     }
 }
+    
