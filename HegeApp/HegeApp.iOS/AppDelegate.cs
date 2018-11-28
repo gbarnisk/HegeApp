@@ -26,28 +26,44 @@ namespace HegeApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-);
-            app.RegisterUserNotificationSettings(notificationSettings);
-            UILocalNotification notification = new UILocalNotification();
-            NSDate.FromTimeIntervalSinceNow(30);
-            notification.AlertAction = "View Alert";
-            notification.AlertBody = "There is a new issue!";
-            UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+            // Request notification permissions from the user
+            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => {
+                // Handle approval
 
+
+                if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+                {
+                    var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+                    );
+
+                    app.RegisterUserNotificationSettings(notificationSettings);
+                }
+
+                // check for a notification
+
+                if (options != null)
+                {
+                    // check for a local notification
+                    if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                    {
+                        var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+                        if (localNotification != null)
+                        {
+                            UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
+                            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+                            Window.RootViewController.PresentViewController(okayAlertController, true, null);
+
+                            // reset our badge
+                            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+                        }
+                    }
+                }
+
+            });
+            
             return base.FinishedLaunching(app, options);
-        }
-        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
-        {
-            // show an alert
-            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
-            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-
-            Window.RootViewController.PresentViewController(okayAlertController, true, null);
-
-            // reset our badge
-            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
         }
 
         /*
@@ -57,6 +73,19 @@ namespace HegeApp.iOS
         {
             base.HandleEventsForBackgroundUrl(application, sessionIdentifier, completionHandler);
             CrossDownloadManager.BackgroundSessionCompletionHandler = completionHandler;
+        }
+
+
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
+            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+            UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
+
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
         }
     }
 }
