@@ -37,9 +37,10 @@ namespace HegeApp.Controllers
         {
             //Temporary hardcoding:
             issueList = new List<Issue>();
-            issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
-            issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
-            issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
+            //issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
+            //issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
+            //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
+            issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev13_i1.pdf", "issuev13_i1.pdf", false));
 
             //Implement proper system
         }
@@ -75,14 +76,11 @@ namespace HegeApp.Controllers
                 }
             }
         }
-    
 
-
-
-/*
- * Saves an object into a textfile at a specified path
- */
-public void SaveToLocal(object issues, string filename)
+        /*
+         * Saves an object into a textfile at a specified path
+         */
+        public void SaveToLocal(object issues, string filename)
         {
             Console.WriteLine("Saved to local started");
             using (var streamWriter = new StreamWriter(filename, true))

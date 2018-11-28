@@ -6,6 +6,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using HegeApp.Models;
+using System;
 
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
@@ -32,7 +33,8 @@ namespace HegeApp.iOS
             if (e.NewElement != null)
             {
                 var customWebView = Element as CustomWebView;
-                string fileName = Path.Combine(NSBundle.MainBundle.BundlePath, string.Format("Content/{0}", WebUtility.UrlEncode(customWebView.Uri)));
+                //string fileName = Path.Combine(NSBundle.MainBundle.BundlePath, string.Format("Content/{0}", WebUtility.UrlEncode(customWebView.Uri)));
+                string fileName = Path.Combine(NSBundle.MainBundle.BundlePath, string.Format(WebUtility.UrlEncode(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), customWebView.Uri))));
                 Control.LoadRequest(new NSUrlRequest(new NSUrl(fileName, false)));
                 Control.ScalesPageToFit = true;
             }
