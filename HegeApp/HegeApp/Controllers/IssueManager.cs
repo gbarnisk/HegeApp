@@ -130,7 +130,7 @@ namespace HegeApp.Controllers
                     if (!currentText.Contains(stringOfIssue))
                     {
                         streamWriter.WriteLine(iss);
-                        Console.WriteLine("I'm a writin");
+                        Console.WriteLine("There is a new Issue that is: " + iss.ToString());
                     }
                 }
 
@@ -175,26 +175,27 @@ namespace HegeApp.Controllers
             //Console.Write(issuelist);
             List<Issue> newList = new List<Issue>();
             string[] result = issuelis1.Split(new[] { '\r', '\n' });
+            Console.WriteLine();
             foreach (String thing in result)
             {
-                object[] elements = thing.Split(new[] { ',' });
-                int hack = 0;
-                foreach (String part in elements)
-                {
-                    Console.WriteLine("WILL'S DEBUGGER" + part);
-                    if (hack == 2 | hack == 5)
+                if(!thing.Equals("")){
+                    object[] elements = thing.Split(new[] { ',' });
+                    int hack = 0;
+                    foreach (String part in elements)
                     {
-                        ToBool(part);
+                        //Console.WriteLine("WILL'S DEBUGGER" + part);
+                        hack++;
                     }
-                    hack++;
+                    //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
+                    Issue CreatedIssue = new Issue(elements[0].ToString(), elements[1].ToString(), elements[2].ToString(), 
+                                                   ToBool(elements[3].ToString()), elements[4].ToString(), elements[5].ToString(),
+                                                   ToBool(elements[6].ToString()));
+                    Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
+                    newList.Add(CreatedIssue);
                 }
 
-
-                //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
-                //Issue CreatedIssue = new Issue (elements[0],);
-                //newList.Add(CreatedIssue);
             }
-            return issueList;
+            return newList;
         }
 
 
