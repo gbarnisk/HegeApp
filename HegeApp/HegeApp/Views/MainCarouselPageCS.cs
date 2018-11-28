@@ -55,7 +55,6 @@ namespace HegeApp.Views
                         {
                             HorizontalOptions = LayoutOptions.Fill,
                             VerticalOptions = LayoutOptions.Fill,
-
                             Children =
                             {
                                 /*new Image

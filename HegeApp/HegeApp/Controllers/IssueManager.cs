@@ -21,6 +21,8 @@ namespace HegeApp.Controllers
     {
         public List<Issue> issueList { get; set; }
         private IDownloadManager downloadManager;
+        public string filePath = "";
+
 
         public IssueManager()
         {
@@ -28,6 +30,8 @@ namespace HegeApp.Controllers
 
             IndexToDrive();
             InitializeToRAM();
+            InitializeTextFile(issueList);
+            ReadFromLocal(filePath);
         }
 
         /*
@@ -109,40 +113,109 @@ namespace HegeApp.Controllers
         }
 
         /*
-         * Saves an object into a textfile at a specified path
-         */
-        public void SaveToLocal(object issues, string filename)
+ * Saves an object into a textfile at a specified path
+ */
+        public void SaveToLocal(List<Issue> issues, string filename)
         {
-            Console.WriteLine("Saved to local started");
+            //Console.WriteLine("Saved to local started");
+            string currentText = ReadForText(filename);
+            Console.Write("Current = " + currentText);
+
             using (var streamWriter = new StreamWriter(filename, true))
             {
-                Console.WriteLine(issues);
-                streamWriter.Write(issues);
+
+                foreach (Issue iss in issues)
+                {
+                    string stringOfIssue = iss.ToString();
+                    if (!currentText.Contains(stringOfIssue))
+                    {
+                        streamWriter.WriteLine(iss);
+                        Console.WriteLine("I'm a writin");
+                    }
+                }
+
+                //Console.WriteLine(issues);
+                //streamWriter.Write(issues);
             }
 
 
+
+        }
+
+        public string ReadForText(string filename)
+        {
+            string content;
+            using (var streamReader = new StreamReader(filename))
+            {
+
+                content = streamReader.ReadToEnd();
+            }
+            return content;
         }
         /*
          * reads a text file at a specified path and returns the content
          * in the form of a list of issues
          * Once IssueListFromString is completed, this should work
          */
-        //public List<Issue> ReadFromLocal(string filename){
-        //    using (var streamReader = new StreamReader(filename))
-        //    {
-        //        var content = streamReader.ReadToEnd();
-        //        List<Issue> issues = IssueListFromString(content);
-        //        return issues;
-        //    }
-        //}
+        public List<Issue> ReadFromLocal(string filename)
+        {
+            using (var streamReader = new StreamReader(filename))
+            {
+
+                string content = streamReader.ReadToEnd();
+                List<Issue> helloTrello = IssueListFromString(content);
+                return helloTrello;
+            }
+        }
         /*
-         * 
+         * Given an output string saved in the text file, parses the code and returns it in a list of issues
          */
-        //public List<Issue> IssueListFromString (String issuetext){
+        public List<Issue> IssueListFromString(String issuelis1)
+        {
+            //Console.Write(issuelist);
+            List<Issue> newList = new List<Issue>();
+            string[] result = issuelis1.Split(new[] { '\r', '\n' });
+            foreach (String thing in result)
+            {
+                object[] elements = thing.Split(new[] { ',' });
+                int hack = 0;
+                foreach (String part in elements)
+                {
+                    Console.WriteLine("WILL'S DEBUGGER" + part);
+                    if (hack == 2 | hack == 5)
+                    {
+                        ToBool(part);
+                    }
+                    hack++;
+                }
 
-        //}
+
+                //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
+                //Issue CreatedIssue = new Issue (elements[0],);
+                //newList.Add(CreatedIssue);
+            }
+            return issueList;
+        }
 
 
+
+
+        /*
+         * converts a string back to a boolean
+         */
+        public Boolean ToBool(string value)
+        {
+            if (value.Equals("true") | value.Equals("True"))
+            {
+                return true;
+            }
+            if (value.Equals("false") | value.Equals("False"))
+            {
+                return false;
+            }
+            throw new ArgumentException("neither true nor false");
+
+        }
         /*
          * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
          */
@@ -151,6 +224,7 @@ namespace HegeApp.Controllers
             Console.WriteLine(issues);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string filename = Path.Combine(path, "StoredIssues.txt");
+            filePath = filename;
             SaveToLocal(issues, filename);
 
         }
@@ -161,7 +235,7 @@ namespace HegeApp.Controllers
         {
             await Task.Run(async () =>
             {
-                System.Console.WriteLine("GRIFFIN'S DEBUG Download method reached");
+                Console.WriteLine("GRIFFIN'S DEBUG Download method reached");
                 IDownloadFile pdf = downloadManager.CreateDownloadFile(issueList[index].PdfURL);
                 downloadManager.Start(pdf);
                 bool isDownloading = true;
