@@ -40,6 +40,12 @@ namespace HegeApp.Controllers
         public void InitializeToRAM()
         {
             //Temporary hardcoding:
+
+            //Brainstorm for the for loop issue creator - Nathan
+            //for (int i = 0; i < hegeLink.Length; i++ )
+               // for (int i = 0; i < buttonTitle.Length; i++)
+                  //  issueList.Add(new Issue(buttonTitle[i], "", "", false, hegeLink[i], "issuev16_i2.pdf", false));
+
             issueList = new List<Issue>();
             //issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
             //issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
@@ -71,35 +77,35 @@ namespace HegeApp.Controllers
                     {
                         string url = match.Groups["href"].Value;
                         string text = match.Groups["value"].Value;
-                        string combine = (url + text);
-                        string[] indexLink = Regex.Split(combine, @"(?<=[https])")
+                        string hegeLink = (url + text);
+                        //string[] indexLink = Regex.Split(combine, @"(?<=[https])")
 
 ;
 
                         if (url.Contains("pdf"))
                         {
 
-                            foreach (var value in indexLink)
-                            {
-                                Console.WriteLine(value);
-                            }
+                           // foreach (var value in indexLink)
+                           // {
+                                Console.WriteLine(hegeLink);
+                            //}
 
 
 
                         }
 
+                       
 
-
-                        foreach (Match match2 in r.Matches(html))
+                            foreach (Match match2 in r.Matches(html))
                         {
                             string words = match2.Groups["title"].Value;
                             string text2 = match2.Groups["value"].Value;
-                            string combine2 = (words + text2);
+                            string buttonTitle = (words + text2);
 
                             if (words.Contains("ISSUE"))
                             {
 
-                                Console.WriteLine(combine2);
+                                Console.WriteLine(buttonTitle);
 
                             }
 
