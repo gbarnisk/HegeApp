@@ -133,6 +133,7 @@ namespace HegeApp.Controllers
                 foreach (Issue iss in issues)
                 {
                     string stringOfIssue = iss.ToString();
+                    //TODO: hey Trevor!!!
                     if (!currentText.Contains(stringOfIssue))
                     {
                         streamWriter.WriteLine(iss);
