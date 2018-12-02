@@ -42,28 +42,31 @@ namespace HegeApp.Controllers
             //Temporary hardcoding:
 
             //Brainstorm for the for loop issue creator - Nathan
-            //for (int i = 0; i < hegeLink.Length; i++ )
-               // for (int i = 0; i < buttonTitle.Length; i++)
-                  //  issueList.Add(new Issue(buttonTitle[i], "", "", false, hegeLink[i], "issuev16_i2.pdf", false));
+           // for (int i = 0; i < ret.Length; i++)
+           // {
+                //for (int i = 0; i < buttonTitle.Length; i++)
+                //issueList.Add(new Issue(buttonTitle[i], "", "", false, hegeLink[i], "issuev16_i2.pdf", false));
 
-            issueList = new List<Issue>();
-            //issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
-            //issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
-            //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
-            issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
+                issueList = new List<Issue>();
+                //issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
+                //issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
+                //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
+                issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
 
-            //Implement proper system
-        }
-
+                //Implement proper system
+            }
+      //  }
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
          */
 
 
 
-        public void IndexToDrive()
+        public static List<string> IndexToDrive()
         {
 
+            List<string> ret = new List<string>();
+            var link = new List<string>();
             WebClient wc = new WebClient();
             using (Stream st = wc.OpenRead("https://macalesterhegemonocle.wordpress.com/2018/11/13/test/"))
             {
@@ -80,43 +83,44 @@ namespace HegeApp.Controllers
                         string hegeLink = (url + text);
                         //string[] indexLink = Regex.Split(combine, @"(?<=[https])")
 
-;
+                        ;
 
                         if (url.Contains("pdf"))
                         {
 
-                           // foreach (var value in indexLink)
-                           // {
-                                Console.WriteLine(hegeLink);
-                            //}
 
 
-
-                        }
-
-                       
-
-                            foreach (Match match2 in r.Matches(html))
-                        {
-                            string words = match2.Groups["title"].Value;
-                            string text2 = match2.Groups["value"].Value;
-                            string buttonTitle = (words + text2);
-
-                            if (words.Contains("ISSUE"))
-                            {
-
-                                Console.WriteLine(buttonTitle);
-
-                            }
+                            ret.Add(hegeLink);
+                            //Console.WriteLine(hegeLink);
 
                         }
 
 
+
+
+                        //    foreach (Match match2 in r.Matches(html))
+                        //{
+                        //string words = match2.Groups["title"].Value;
+                        //string text2 = match2.Groups["value"].Value;
+                        //string buttonTitle = (words + text2);
+
+                        //if (words.Contains("ISSUE"))
+                        //{
+
+                        //    Console.WriteLine(buttonTitle);
+
+                        //}
 
                     }
+
+                    return ret;
+
                 }
+
             }
         }
+
+
 
         /*
  * Saves an object into a textfile at a specified path
@@ -310,5 +314,6 @@ namespace HegeApp.Controllers
             }
         }
     }
-}
+    }
+
     
