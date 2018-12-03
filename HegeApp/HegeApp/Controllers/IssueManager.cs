@@ -28,10 +28,10 @@ namespace HegeApp.Controllers
         {
             downloadManager = CrossDownloadManager.Current;
 
-            IndexToDrive();
+            //IndexToDrive();
             InitializeToRAM();
-            InitializeTextFile(issueList);
-            ReadFromLocal(filePath);
+            //InitializeTextFile(issueList);
+            //ReadFromLocal(filePath);
         }
 
         /*
@@ -234,7 +234,18 @@ namespace HegeApp.Controllers
         public void InitializeTextFile(List<Issue> issues)
         {
             Console.WriteLine(issues);
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string path;
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                path = "/android_asset/Content/";
+            } else if (Device.RuntimePlatform == Device.iOS)
+            {
+                path = "/Content/";
+            } else
+            {
+                path = "";
+            }
             string filename = Path.Combine(path, "StoredIssues.txt");
             filePath = filename;
             SaveToLocal(issues, filename);
