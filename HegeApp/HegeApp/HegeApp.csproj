@@ -19,6 +19,7 @@
     <EmbeddedResource Remove="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Depreciated\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -33,14 +34,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Depreciated\MainCarouselPage.xaml.cs">
-      <DependentUpon>MainCarouselPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Depreciated\PDFViewPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="TestPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

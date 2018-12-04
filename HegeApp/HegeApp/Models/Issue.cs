@@ -10,6 +10,7 @@ namespace HegeApp.Models
         public string CoverURL { get; set; }
         public string CoverURI { get; set; }
         public bool CoverLocal { get; set; } //Whether there is a local copy of the cover
+        public string CoverPath { get; set; }
         public string PdfURL { get; set; }
         public string PdfURI { get; set; }
         public bool PdfLocal { get; set; } //Whether there is a local copy of the pdf
@@ -21,6 +22,7 @@ namespace HegeApp.Models
             this.CoverURL = CoverURL;
             this.CoverURI = CoverURI;
             this.CoverLocal = CoverLocal;
+            this.CoverPath = "";
             this.PdfURL = PdfURL;
             this.PdfURI = PdfURI;
             this.PdfLocal = PdfLocal;

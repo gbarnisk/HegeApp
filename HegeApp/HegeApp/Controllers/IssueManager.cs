@@ -17,7 +17,7 @@ using Xamarin.Forms.PlatformConfiguration;
 
 namespace HegeApp.Controllers
 {
-    class IssueManager
+    public class IssueManager
     {
         public List<Issue> issueList { get; set; }
         private IDownloadManager downloadManager;
@@ -259,6 +259,8 @@ namespace HegeApp.Controllers
             await Task.Run(async () =>
             {
                 Console.WriteLine("GRIFFIN'S DEBUG Download method reached");
+                Console.WriteLine("GRIFFIN'S DEBUG Trying to download from " + issueList[index].PdfURL);
+                Console.WriteLine("GRIFFIN'S DEBUG DownloadIssueAsync is trying to download the issue " + issueList[index]);
                 IDownloadFile pdf = downloadManager.CreateDownloadFile(issueList[index].PdfURL);
                 downloadManager.Start(pdf);
                 bool isDownloading = true;
@@ -273,8 +275,14 @@ namespace HegeApp.Controllers
                     issueList[index].PdfLocal = true;
                     issueList[index].PdfPath = pdf.DestinationPathName;
                 }
-            });
+            });         
+        }
 
+        /*
+         * Downloads the cover of the issue from the index to a local location.
+         */
+        public async Task DownloadCoverAsync(int index)
+        {
             await Task.Run(async () =>
             {
                 IDownloadFile cover = downloadManager.CreateDownloadFile(issueList[index].CoverURL);
@@ -288,10 +296,10 @@ namespace HegeApp.Controllers
 
                 if (cover.Status == DownloadFileStatus.COMPLETED)
                 {
-                    issueList[index].PdfLocal = true;
+                    issueList[index].CoverLocal = true;
+                    issueList[index].CoverPath = cover.DestinationPathName;
                 }
             });
-
         }
 
         /*
@@ -310,7 +318,7 @@ namespace HegeApp.Controllers
                 case DownloadFileStatus.PAUSED:
                 case DownloadFileStatus.PENDING:
                 case DownloadFileStatus.RUNNING:
-                    System.Console.WriteLine("GRIFFIN'S DEBUG Download started");
+                    System.Console.WriteLine("GRIFFIN'S DEBUG Download started/in progress");
                     return true;
                 case DownloadFileStatus.COMPLETED:
                     System.Console.WriteLine("GRIFFIN'S DEBUG Download completed");

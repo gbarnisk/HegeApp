@@ -8,8 +8,8 @@ namespace HegeApp.Models
 {
     class CustomButton : Button
     {
-        public static readonly BindableProperty pdfURIProperty = BindableProperty.Create<CustomButton, string>(p => p.pdfURI, default(string));
-
+        /*public static readonly BindableProperty pdfURIProperty = BindableProperty.Create<CustomButton, string>(p => p.pdfURI, default(string));
+        
         public string pdfURI {
             get { return (string)GetValue(pdfURIProperty); }
             set { SetValue(pdfURIProperty, value); }
@@ -20,6 +20,13 @@ namespace HegeApp.Models
         {
             get { return (Issue)GetValue(IssueProperty); }
             set { SetValue(IssueProperty, value); }
+        }*/
+
+        public BindableProperty IndexProperty = BindableProperty.Create<CustomButton, int>(p => p.Index, default(int));
+        public int Index 
+        {
+            get { return (int)GetValue(IndexProperty); }
+            set { SetValue(IndexProperty, value); }
         }
     }
 }

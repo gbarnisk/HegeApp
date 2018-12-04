@@ -12,19 +12,17 @@ namespace HegeApp.Views
 {
     class MainCarouselPageCS : CarouselPage
     {
-        public IssueManager IssueManager;
 
-        public MainCarouselPageCS(IssueManager issueManager)
+        public MainCarouselPageCS()
         {
-            this.IssueManager = issueManager;
-
-            for (int i = 0; i < issueManager.issueList.Count; i++)
+            for (int i = 0; i < App.issueManager.issueList.Count; i++)
             {
                 CustomButton viewButton = new CustomButton
                 {
-                    pdfURI = issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
-                    Issue = issueManager.issueList[i],
-                    Text = issueManager.issueList[i].IssueName,
+                    //pdfURI = App.issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
+                    //Issue = App.issueManager.issueList[i],
+                    Index = i,
+                    Text = App.issueManager.issueList[i].IssueName,
                     BackgroundColor = Color.LightGray,
                     BorderWidth = 2,
                     BorderColor = Color.Black,
@@ -33,9 +31,10 @@ namespace HegeApp.Views
                 };
                 viewButton.Clicked += ViewClicked;
 
-                Button downloadButton = new Button
+                Button downloadButton = new CustomButton
                 {
                     Text = "Download",
+                    Index = i,
                     BackgroundColor = Color.LightBlue,
                     BorderWidth = 2,
                     BorderColor = Color.Black,
@@ -79,7 +78,7 @@ namespace HegeApp.Views
         private void ViewClicked(object sender, EventArgs e)
         {
             CustomButton hackButton = (CustomButton)sender; //Yes there is a better way. I don't feel like learning how to do it.
-            Navigation.PushModalAsync(new PDFViewPageCS(hackButton.pdfURI, hackButton.Issue));
+            Navigation.PushModalAsync(new PDFViewPageCS(/*hackButton.pdfURI, hackButton.Issue, */hackButton.Index));
         }
 
         /*
@@ -88,7 +87,8 @@ namespace HegeApp.Views
         private void DownloadClicked(object sender, EventArgs e)
         {
             System.Console.WriteLine("GRIFFIN'S DEBUG Download button clicked");
-            IssueManager.DownloadIssueAsync(0);
+            CustomButton hackButton = (CustomButton)sender;
+            App.issueManager.DownloadIssueAsync(hackButton.Index);
         }
     }
 }

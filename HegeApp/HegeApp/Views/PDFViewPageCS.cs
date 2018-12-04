@@ -13,7 +13,7 @@ namespace HegeApp.Views
         /*
          * Takes a file name (uri) and constructs a pdf web view page accessing that file.
          */
-        public PDFViewPageCS(string uri, Issue issue)
+        public PDFViewPageCS(/*string uri, Issue issue, */int index)
         {
             Button dismissModal = new Button
             {
@@ -36,8 +36,9 @@ namespace HegeApp.Views
                     //},
                     new CustomWebView
                     {
-                        Uri = uri,
-                        Issue = issue,
+                        //Uri = uri,
+                        //Issue = issue,
+                        Index = index,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.FillAndExpand
                     },
