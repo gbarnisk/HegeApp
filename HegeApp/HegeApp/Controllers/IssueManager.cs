@@ -22,7 +22,7 @@ namespace HegeApp.Controllers
         public List<Issue> issueList { get; set; }
         private IDownloadManager downloadManager;
         public string filePath = "";
-
+        public List<Issue> finalList { get; set; }
 
         public IssueManager()
         {
@@ -30,8 +30,16 @@ namespace HegeApp.Controllers
 
             //IndexToDrive();
             InitializeToRAM();
-            //InitializeTextFile(issueList);
-            //ReadFromLocal(filePath);
+            foreach(Issue thingamabob in issueList)
+            {
+                Console.WriteLine("I hate app" + thingamabob.ToString());
+            }
+            InitializeTextFile(issueList);
+            List<Issue> thing = ReadFromLocal(filePath);
+            foreach (Issue thing3 in thing)
+            {
+                Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
+            }
         }
 
         /*
@@ -53,8 +61,10 @@ namespace HegeApp.Controllers
                 //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
                 issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
 
-                //Implement proper system
-            }
+                issueList.Add(new Issue("totally different issue", "i am string", "thing", true, "haych tee tee pee ess semicolon backslash backslash", "", false));
+                issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
+            //Implement proper system
+        }
       //  }
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
@@ -147,6 +157,7 @@ namespace HegeApp.Controllers
 
                 //Console.WriteLine(issues);
                 //streamWriter.Write(issues);
+                streamWriter.Close();
             }
 
 
@@ -234,19 +245,22 @@ namespace HegeApp.Controllers
         public void InitializeTextFile(List<Issue> issues)
         {
             Console.WriteLine(issues);
-            //string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string path;
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                path = "/android_asset/Content/";
-            } else if (Device.RuntimePlatform == Device.iOS)
-            {
-                path = "/Content/";
-            } else
-            {
-                path = "";
-            }
-            string filename = Path.Combine(path, "StoredIssues.txt");
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //string path;
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    path = "/android_asset/Content/";
+            //} else if (Device.RuntimePlatform == Device.iOS)
+            //{
+            //    path = "/Content/";
+            //} else
+            //{
+            //    path = "";
+            //}
+            string filename = Path.Combine(path, "IssueListStorage.txt");
+            File.Create(filename).Dispose();
+            Console.WriteLine("Hey you idiot; this is the filename" + filename);
+            Console.WriteLine("im loving this" + File.Exists(filename));
             filePath = filename;
             SaveToLocal(issues, filename);
 

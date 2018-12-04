@@ -14,7 +14,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
@@ -354,6 +353,7 @@
     <AndroidAsset Include="Assets\Content\Hege1.pdf" />
     <AndroidAsset Include="Assets\Content\Hege2.pdf" />
     <AndroidAsset Include="Assets\Content\Hege3.pdf" />
+    <AndroidAsset Include="Assets\Content\IssueListStorage.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
