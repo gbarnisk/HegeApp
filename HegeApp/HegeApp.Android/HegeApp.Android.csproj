@@ -353,7 +353,6 @@
     <AndroidAsset Include="Assets\Content\Hege1.pdf" />
     <AndroidAsset Include="Assets\Content\Hege2.pdf" />
     <AndroidAsset Include="Assets\Content\Hege3.pdf" />
-    <AndroidAsset Include="Assets\Content\IssueListStorage.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />

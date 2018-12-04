@@ -61,8 +61,8 @@ namespace HegeApp.Controllers
                 //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
                 issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
 
-                issueList.Add(new Issue("totally different issue", "i am string", "thing", true, "haych tee tee pee ess semicolon backslash backslash", "", false));
-                issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
+                //issueList.Add(new Issue("totally different issue", "i am string", "thing", true, "haych tee tee pee ess semicolon backslash backslash", "", false));
+                //issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
             //Implement proper system
         }
       //  }
