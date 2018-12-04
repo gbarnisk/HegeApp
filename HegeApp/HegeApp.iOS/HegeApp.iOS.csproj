@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Content\hege.pdf" />
     <Compile Include="ViewController.cs" />
+    <None Include="Content\IssueListStorage.txt" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
