@@ -89,8 +89,8 @@ namespace HegeApp.Controllers
                     foreach (Match match in r.Matches(html))
                     {
                         string url = match.Groups["href"].Value;
-                        string text = match.Groups["value"].Value;
-                        string hegeLink = (url + text);
+                        //string text = match.Groups["value"].Value;
+                        string hegeLink = (url);
                         //string[] indexLink = Regex.Split(combine, @"(?<=[https])")
 
                         ;
