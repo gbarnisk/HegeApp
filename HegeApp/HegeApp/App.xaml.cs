@@ -22,7 +22,6 @@ namespace HegeApp
             issueManager = new IssueManager();
 
             //issueManager.InitializeTextFile(issueList);
-            System.Console.WriteLine("Wow! It worked??");
             MainPage = new MainCarouselPageCS(); //Boots to the C# port of the carousel page.
             //MainPage = new TestPage();
         }

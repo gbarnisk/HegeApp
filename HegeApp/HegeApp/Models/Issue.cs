@@ -49,6 +49,12 @@ namespace HegeApp.Models
             return final;
         }
 
+        public int CompareTo(Issue i)
+        {
+            //return string.Compare(this.PdfURL, i.PdfURL, System.StringComparison.CurrentCulture);
+            return this.PdfURL.CompareTo(i.PdfURL);
+        }
+
     }
 
 }

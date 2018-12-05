@@ -30,17 +30,13 @@ namespace HegeApp.Controllers
 
             IndexToDrive();
             InitializeToRAM();
-            foreach(Issue thingamabob in issueList)
-            {
-                Console.WriteLine("I hate app" + thingamabob.ToString());
-            }
             InitializeTextFile(issueList);
-            List<Issue> thing = ReadFromLocal(filePath);
-            foreach (Issue thing3 in thing)
-            {
-                Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
+            finalList = ReadFromLocal(filePath);
+            Console.WriteLine("the final list size is:" +finalList.Count);
+
             }
-        }
+
+
 
         /*
          * Loads issues from the hard drive metadata into a list stored in RAM.
@@ -53,12 +49,8 @@ namespace HegeApp.Controllers
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
          */
-
-
-
         public void IndexToDrive()
         {
-
             List<string> ret = new List<string>();
             List<string> names = new List<string>();
             var link = new List<string>();
@@ -82,50 +74,37 @@ namespace HegeApp.Controllers
                         {
                             ret.Add(url);
                             names.Add(text);
-                            issueList = new List<Issue>();
-                            
+                 
                         }
+                        issueList = new List<Issue>();
+
                         for (int i = 0; i < ret.Count; i++)
                             {
-
-
-                                
-                                
-
-                                issueList.Add(new Issue(names[i], "", "", false, ret[i] , "", false));
-                                
+                            issueList.Add(new Issue(names[i], "", "", false, ret[i], "", false));
                             }
                         }
-
-
-
-
-                       
                     }
-
-                 
-
                 }
-
             }
 
-
-
-
         /*
- * Saves an object into a textfile at a specified path
- */
+        * Saves a list of Issues into a textfile, used to save Issue objects when app closes
+         */
         public void SaveToLocal(List<Issue> issues, string filename)
         {
-            //Console.WriteLine("Saved to local started");
+            List<Issue> cleanIssues = new List<Issue>();
             string currentText = ReadForText(filename);
-            Console.Write("Current = " + currentText);
-
+            foreach(Issue iss in issues)
+            {
+                if (!cleanIssues.Contains(iss)){
+                    cleanIssues.Add(iss);
+                }
+            }
             using (var streamWriter = new StreamWriter(filename, true))
             {
-
-                foreach (Issue iss in issues)
+                foreach (Issue iss in cleanIssues)
                 {
+                    Console.WriteLine("this is going to suck: " + currentText);
                     string stringOfIssue = iss.ToString();
                     //TODO: hey Trevor!!!
                     if (!currentText.Contains(stringOfIssue))
@@ -134,30 +113,27 @@ namespace HegeApp.Controllers
                         Console.WriteLine("There is a new Issue that is: " + iss.ToString());
                     }
                 }
-
-                //Console.WriteLine(issues);
-                //streamWriter.Write(issues);
                 streamWriter.Close();
             }
-
-
-
         }
 
+        /*
+         * returns (in string form) the content of a file at the given path
+         */
         public string ReadForText(string filename)
         {
             string content;
             using (var streamReader = new StreamReader(filename))
             {
-
                 content = streamReader.ReadToEnd();
             }
             return content;
         }
+
         /*
-         * reads a text file at a specified path and returns the content
-         * in the form of a list of issues
-         * Once IssueListFromString is completed, this should work
+         * Arching function that takes the path of where the text file is, 
+         * converts it back into the list of issues using IssueListFromString
+         * and returns that list
          */
         public List<Issue> ReadFromLocal(string filename)
         {
@@ -169,6 +145,7 @@ namespace HegeApp.Controllers
                 return helloTrello;
             }
         }
+
         /*
          * Given an output string saved in the text file, parses the code and returns it in a list of issues
          */
@@ -182,29 +159,21 @@ namespace HegeApp.Controllers
             {
                 if(!thing.Equals("")){
                     object[] elements = thing.Split(new[] { ',' });
-                    int hack = 0;
-                    foreach (String part in elements)
-                    {
-                        //Console.WriteLine("WILL'S DEBUGGER" + part);
-                        hack++;
-                    }
-                    //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
-                    Issue CreatedIssue = new Issue(elements[0].ToString(), elements[1].ToString(), elements[2].ToString(), 
-                                                   ToBool(elements[3].ToString()), elements[4].ToString(), elements[5].ToString(),
+                    Issue CreatedIssue = new Issue(elements[0].ToString(), 
+                                                   elements[1].ToString(), 
+                                                   elements[2].ToString(), 
+                                                   ToBool(elements[3].ToString()),
+                                                   elements[4].ToString(),
+                                                   elements[5].ToString(),
                                                    ToBool(elements[6].ToString()));
-                    Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
                     newList.Add(CreatedIssue);
                 }
-
             }
             return newList;
         }
 
-
-
-
         /*
-         * converts a string back to a boolean
+         * Converts strings to booleans
          */
         public Boolean ToBool(string value)
         {
@@ -219,28 +188,16 @@ namespace HegeApp.Controllers
             throw new ArgumentException("neither true nor false");
 
         }
+
         /*
-         * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
+         * Wrapper for saving a list of issues to a text file located in 
+         * the resources folder of the Device        
          */
         public void InitializeTextFile(List<Issue> issues)
         {
-            Console.WriteLine(issues);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            //string path;
-            //if (Device.RuntimePlatform == Device.Android)
-            //{
-            //    path = "/android_asset/Content/";
-            //} else if (Device.RuntimePlatform == Device.iOS)
-            //{
-            //    path = "/Content/";
-            //} else
-            //{
-            //    path = "";
-            //}
             string filename = Path.Combine(path, "IssueListStorage.txt");
             File.Create(filename).Dispose();
-            Console.WriteLine("Hey you idiot; this is the filename" + filename);
-            Console.WriteLine("im loving this" + File.Exists(filename));
             filePath = filename;
             SaveToLocal(issues, filename);
 
