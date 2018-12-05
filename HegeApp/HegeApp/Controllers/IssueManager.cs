@@ -47,23 +47,7 @@ namespace HegeApp.Controllers
          */
         public void InitializeToRAM()
         {
-            //Temporary hardcoding:
-
-            //Brainstorm for the for loop issue creator - Nathan
-           // for (int i = 0; i < ret.Length; i++)
-           // {
-                //for (int i = 0; i < buttonTitle.Length; i++)
-                //issueList.Add(new Issue(buttonTitle[i], "", "", false, hegeLink[i], "issuev16_i2.pdf", false));
-
-                //issueList = new List<Issue>();
-                //issueList.Add(new Issue("Life on the Hege", "https://macalesterhegemonocle.files.wordpress.com/2018/11/v2_i1.pdf", "Life_on_the_hege.png", true, "https://macalesterhegemonocle.files.wordpress.com/2018/11/v9_i2.pdf", "Hege1.pdf", true));
-                //issueList.Add(new Issue("The Hege Gets a Job", "", "The_Hege_gets_a_job.png", true, "", "Hege2.pdf", true));
-                //issueList.Add(new Issue("The Last Minute Issue", "", "The_Last_Minute_Issue.png", true, "", "Hege3.pdf", true));
-                //issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
-
-                //issueList.Add(new Issue("totally different issue", "i am string", "thing", true, "haych tee tee pee ess semicolon backslash backslash", "", false));
-                //issueList.Add(new Issue("v13 i1", "", "", false, "https://macalesterhegemonocle.files.wordpress.com/2018/11/issuev16_i2.pdf", "issuev16_i2.pdf", false));
-            //Implement proper system
+           
         }
       //  }
         /*
@@ -76,7 +60,9 @@ namespace HegeApp.Controllers
         {
 
             List<string> ret = new List<string>();
+            List<string> names = new List<string>();
             var link = new List<string>();
+
             WebClient wc = new WebClient();
             using (Stream st = wc.OpenRead("https://macalesterhegemonocle.wordpress.com/2018/11/13/test/"))
             {
@@ -89,45 +75,32 @@ namespace HegeApp.Controllers
                     foreach (Match match in r.Matches(html))
                     {
                         string url = match.Groups["href"].Value;
-                        //string text = match.Groups["value"].Value;
-                        string hegeLink = (url);
-                        //string[] indexLink = Regex.Split(combine, @"(?<=[https])")
+                        string text = match.Groups["value"].Value;
 
-                        ;
 
                         if (url.Contains("pdf"))
                         {
-                            ret.Add(hegeLink);
+                            ret.Add(url);
+                            names.Add(text);
                             issueList = new List<Issue>();
+                            
                         }
                         for (int i = 0; i < ret.Count; i++)
                             {
 
 
-                                ;
-                                //Console.WriteLine(hegeLink);
+                                
+                                
 
-                                issueList.Add(new Issue("v13 i1", "", "", false, ret[i] , "issuev16_i2.pdf", false));
-                                //Console.WriteLine(hegeLink);
+                                issueList.Add(new Issue(names[i], "", "", false, ret[i] , "", false));
+                                
                             }
                         }
 
 
 
 
-                        //    foreach (Match match2 in r.Matches(html))
-                        //{
-                        //string words = match2.Groups["title"].Value;
-                        //string text2 = match2.Groups["value"].Value;
-                        //string buttonTitle = (words + text2);
-
-                        //if (words.Contains("ISSUE"))
-                        //{
-
-                        //    Console.WriteLine(buttonTitle);
-
-                        //}
-
+                       
                     }
 
                  
