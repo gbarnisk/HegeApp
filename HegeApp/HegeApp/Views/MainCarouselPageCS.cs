@@ -17,13 +17,6 @@ namespace HegeApp.Views
         {
             for (int i = 0; i < App.issueManager.issueList.Count; i++)
             {
-                if (!App.issueManager.issueList[i].CoverLocal)
-                {
-                    App.issueManager.DownloadCoverAsync(i);
-                }
-                
-
-
                 CustomButton viewButton = new CustomButton
                 {
                     //pdfURI = App.issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
