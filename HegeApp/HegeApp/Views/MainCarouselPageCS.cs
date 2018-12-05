@@ -17,6 +17,13 @@ namespace HegeApp.Views
         {
             for (int i = 0; i < App.issueManager.issueList.Count; i++)
             {
+                if (!App.issueManager.issueList[i].CoverLocal)
+                {
+                    App.issueManager.DownloadCoverAsync(i);
+                }
+                
+
+
                 CustomButton viewButton = new CustomButton
                 {
                     //pdfURI = App.issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
@@ -58,12 +65,12 @@ namespace HegeApp.Views
                             VerticalOptions = LayoutOptions.Fill,
                             Children =
                             {
-                                /*new Image
+                                new Image
                                 {
-                                    Source = issues[i].coverURI,
+                                    Source = App.issueManager.issueList[i].CoverPath,
                                     HorizontalOptions = LayoutOptions.FillAndExpand,
                                     VerticalOptions = LayoutOptions.FillAndExpand
-                                },*/ //There is an issue with android which is causing crashes when images are loaded.
+                                }, //There is an issue with android which is causing crashes when images are loaded.
                                 viewButton,
                                 downloadButton,
                                 //testlabel
