@@ -80,7 +80,7 @@ namespace HegeApp.Controllers
 
                         for (int i = 0; i < ret.Count; i++)
                             {
-                            issueList.Add(new Issue(names[i], "", "", false, ret[i], "", false));
+                            //issueList.Add(new Issue(names[i], "", "", false, ret[i], "", false));
                             }
                         }
                     }
@@ -159,13 +159,16 @@ namespace HegeApp.Controllers
             {
                 if(!thing.Equals("")){
                     object[] elements = thing.Split(new[] { ',' });
-                    Issue CreatedIssue = new Issue(elements[0].ToString(), 
-                                                   elements[1].ToString(), 
-                                                   elements[2].ToString(), 
-                                                   ToBool(elements[3].ToString()),
+                    Issue CreatedIssue = new Issue(elements[0].ToString(),
+                                                   elements[1].ToString(),
+                                                   elements[2].ToString(),
+                                                   elements[3].ToString(),
                                                    elements[4].ToString(),
-                                                   elements[5].ToString(),
-                                                   ToBool(elements[6].ToString()));
+                                                   ToBool(elements[5].ToString()),
+                                                   elements[6].ToString(),
+                                                   elements[7].ToString(),
+                                                   elements[8].ToString(),
+                                                   ToBool(elements[9].ToString()));
                     newList.Add(CreatedIssue);
                 }
             }
