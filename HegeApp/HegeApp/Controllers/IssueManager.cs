@@ -28,32 +28,40 @@ namespace HegeApp.Controllers
         {
             downloadManager = CrossDownloadManager.Current;
 
+            issueList = new List<Issue>();
+
             IndexToDrive();
             InitializeToRAM();
-            InitializeTextFile(issueList);
-            finalList = ReadFromLocal(filePath);
-            Console.WriteLine("the final list size is:" +finalList.Count);
-
+            foreach (Issue thingamabob in issueList)
+            {
+                Console.WriteLine("I hate app" + thingamabob.ToString());
             }
-
-
+            InitializeTextFile(issueList);
+            List<Issue> thing = ReadFromLocal(filePath);
+            foreach (Issue thing3 in thing)
+            {
+                Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
+            }
+        }
 
         /*
          * Loads issues from the hard drive metadata into a list stored in RAM.
          */
         public void InitializeToRAM()
         {
-           
+
         }
-      //  }
+        //  }
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
          */
+
+
+
         public void IndexToDrive()
         {
-            List<string> ret = new List<string>();
-            List<string> names = new List<string>();
-            var link = new List<string>();
+
+            List<Issue> issues = new List<Issue>();
 
             WebClient wc = new WebClient();
             using (Stream st = wc.OpenRead("https://macalesterhegemonocle.wordpress.com/2018/11/13/test/"))
@@ -63,48 +71,112 @@ namespace HegeApp.Controllers
                     string html = sr.ReadToEnd();
 
                     Regex r = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
+                    //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>(?<value>.*?)>");
+                    //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>>");
+                    Regex t = new Regex("<img.+?src=[\"'](.+?)[\"'].*?>");
 
                     foreach (Match match in r.Matches(html))
                     {
-                        string url = match.Groups["href"].Value;
-                        string text = match.Groups["value"].Value;
-
-
-                        if (url.Contains("pdf"))
+                        string pdfurl = match.Groups["href"].Value;
+                        if (pdfurl.Contains("issue"))
                         {
-                            ret.Add(url);
-                            names.Add(text);
-                 
-                        }
-                        issueList = new List<Issue>();
+                            string issueName = match.Groups["value"].Value;
+                            string[] elements = pdfurl.Split(new[] { '/' });
+                            string pdfFileName = elements[elements.Length - 1];
+                            Console.WriteLine("look here");
+                            Console.WriteLine(pdfFileName);
 
-                        for (int i = 0; i < ret.Count; i++)
+                            bool exists = false;
+                            foreach (Issue issue in issues)
                             {
-                            //issueList.Add(new Issue(names[i], "", "", false, ret[i], "", false));
+                                if (issue.CoverURI.Split(new[] { '.' })[0].Equals(pdfFileName.Split(new[] { '.' })[0])) //This condition checks if there is already an issue object with the same filename but for the cover, rather than the pdf
+                                {
+                                    issue.PdfURL = pdfurl;
+                                    issue.PdfURI = pdfFileName;
+                                    exists = true;
+                                }
+                            }
+
+                            if (!exists)
+                            {
+                                issues.Add(new Issue(issueName, "", "", false, pdfurl, pdfFileName, false));
                             }
                         }
                     }
+
+                    Console.WriteLine("I am groot");
+                    foreach (Match match in t.Matches(html))
+                    {
+                        string pngurl = match.Groups[1].Value;
+                        if (pngurl.Contains("cover"))
+                        {
+                            Console.WriteLine(pngurl);
+                            string[] elements = pngurl.Split(new[] { '/', '?' });
+                            string pngFileName = elements[elements.Length - 2];
+                            System.Console.WriteLine(pngFileName);
+                        }
+                    }
+
+
+
+
+
+
+
+                    //if (url.Contains("pdf"))
+                    //{
+                    //    ret.Add(url);
+                    //    names.Add(name);
+                    //    issueList = new List<Issue>();
+
+                    //}
+                    //for (int i = 0; i < ret.Count; i++)
+                    //    {
+
+                    //    //for (int j = 0; j < issueList.Count; j++){
+                    //    //    if(issueList[j].IssueName.Equals(text)){
+
+
+                    //    //    }
+                    //    //}
+
+
+
+                    //        issueList.Add(new Issue(names[i], "", "", false, ret[i] , "", false));
+
+                    //    }
+
+
+
+
+
+
+                    //
+
+
+
                 }
+
             }
+        }
+
+
+
 
         /*
-        * Saves a list of Issues into a textfile, used to save Issue objects when app closes
-         */
+ * Saves an object into a textfile at a specified path
+ */
         public void SaveToLocal(List<Issue> issues, string filename)
         {
-            List<Issue> cleanIssues = new List<Issue>();
+            //Console.WriteLine("Saved to local started");
             string currentText = ReadForText(filename);
-            foreach(Issue iss in issues)
-            {
-                if (!cleanIssues.Contains(iss)){
-                    cleanIssues.Add(iss);
-                }
-            }
+            Console.Write("Current = " + currentText);
+
             using (var streamWriter = new StreamWriter(filename, true))
             {
-                foreach (Issue iss in cleanIssues)
+
+                foreach (Issue iss in issues)
                 {
-                    Console.WriteLine("this is going to suck: " + currentText);
                     string stringOfIssue = iss.ToString();
                     //TODO: hey Trevor!!!
                     if (!currentText.Contains(stringOfIssue))
@@ -113,27 +185,30 @@ namespace HegeApp.Controllers
                         Console.WriteLine("There is a new Issue that is: " + iss.ToString());
                     }
                 }
+
+                //Console.WriteLine(issues);
+                //streamWriter.Write(issues);
                 streamWriter.Close();
             }
+
+
+
         }
 
-        /*
-         * returns (in string form) the content of a file at the given path
-         */
         public string ReadForText(string filename)
         {
             string content;
             using (var streamReader = new StreamReader(filename))
             {
+
                 content = streamReader.ReadToEnd();
             }
             return content;
         }
-
         /*
-         * Arching function that takes the path of where the text file is, 
-         * converts it back into the list of issues using IssueListFromString
-         * and returns that list
+         * reads a text file at a specified path and returns the content
+         * in the form of a list of issues
+         * Once IssueListFromString is completed, this should work
          */
         public List<Issue> ReadFromLocal(string filename)
         {
@@ -145,7 +220,6 @@ namespace HegeApp.Controllers
                 return helloTrello;
             }
         }
-
         /*
          * Given an output string saved in the text file, parses the code and returns it in a list of issues
          */
@@ -157,26 +231,32 @@ namespace HegeApp.Controllers
             Console.WriteLine();
             foreach (String thing in result)
             {
-                if(!thing.Equals("")){
+                if (!thing.Equals(""))
+                {
                     object[] elements = thing.Split(new[] { ',' });
-                    Issue CreatedIssue = new Issue(elements[0].ToString(),
-                                                   elements[1].ToString(),
-                                                   elements[2].ToString(),
-                                                   elements[3].ToString(),
-                                                   elements[4].ToString(),
-                                                   ToBool(elements[5].ToString()),
-                                                   elements[6].ToString(),
-                                                   elements[7].ToString(),
-                                                   elements[8].ToString(),
-                                                   ToBool(elements[9].ToString()));
+                    int hack = 0;
+                    foreach (String part in elements)
+                    {
+                        //Console.WriteLine("WILL'S DEBUGGER" + part);
+                        hack++;
+                    }
+                    //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
+                    Issue CreatedIssue = new Issue(elements[0].ToString(), elements[1].ToString(), elements[2].ToString(),
+                                                   ToBool(elements[3].ToString()), elements[4].ToString(), elements[5].ToString(),
+                                                   ToBool(elements[6].ToString()));
+                    Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
                     newList.Add(CreatedIssue);
                 }
+
             }
             return newList;
         }
 
+
+
+
         /*
-         * Converts strings to booleans
+         * converts a string back to a boolean
          */
         public Boolean ToBool(string value)
         {
@@ -191,16 +271,28 @@ namespace HegeApp.Controllers
             throw new ArgumentException("neither true nor false");
 
         }
-
         /*
-         * Wrapper for saving a list of issues to a text file located in 
-         * the resources folder of the Device        
+         * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
          */
         public void InitializeTextFile(List<Issue> issues)
         {
+            Console.WriteLine(issues);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //string path;
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    path = "/android_asset/Content/";
+            //} else if (Device.RuntimePlatform == Device.iOS)
+            //{
+            //    path = "/Content/";
+            //} else
+            //{
+            //    path = "";
+            //}
             string filename = Path.Combine(path, "IssueListStorage.txt");
             File.Create(filename).Dispose();
+            Console.WriteLine("Hey you idiot; this is the filename" + filename);
+            Console.WriteLine("im loving this" + File.Exists(filename));
             filePath = filename;
             SaveToLocal(issues, filename);
 
@@ -229,7 +321,7 @@ namespace HegeApp.Controllers
                     issueList[index].PdfLocal = true;
                     issueList[index].PdfPath = pdf.DestinationPathName;
                 }
-            });         
+            });
         }
 
         /*
@@ -287,6 +379,4 @@ namespace HegeApp.Controllers
             }
         }
     }
-    }
-
-    
+}
