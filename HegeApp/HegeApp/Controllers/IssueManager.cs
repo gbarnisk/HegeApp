@@ -28,9 +28,7 @@ namespace HegeApp.Controllers
         {
             downloadManager = CrossDownloadManager.Current;
 
-            issueList = new List<Issue>();
-
-            IndexToDrive();
+            issueList = IndexToDrive();
             InitializeToRAM();
             foreach (Issue thingamabob in issueList)
             {
@@ -58,7 +56,7 @@ namespace HegeApp.Controllers
 
 
 
-        public void IndexToDrive()
+        public List<Issue> IndexToDrive()
         {
 
             List<Issue> issues = new List<Issue>();
@@ -70,27 +68,35 @@ namespace HegeApp.Controllers
                 {
                     string html = sr.ReadToEnd();
 
-                    Regex r = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
+                    Regex hrefRegex = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
                     //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>(?<value>.*?)>");
                     //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>>");
-                    Regex t = new Regex("<img.+?src=[\"'](.+?)[\"'].*?>");
+                    Regex srcRegex = new Regex("<img.+?src=[\"'](.+?)[\"'].*?>");
 
-                    foreach (Match match in r.Matches(html))
+                    foreach (Match match in hrefRegex.Matches(html))
                     {
                         string pdfurl = match.Groups["href"].Value;
-                        if (pdfurl.Contains("issue"))
+                        if (pdfurl.Contains("pdf"))
                         {
                             string issueName = match.Groups["value"].Value;
                             string[] elements = pdfurl.Split(new[] { '/' });
+
+                            foreach (String thingy in elements)
+                            {
+                                Console.WriteLine("Element: " + thingy); 
+                            }
+
                             string pdfFileName = elements[elements.Length - 1];
                             Console.WriteLine("look here");
                             Console.WriteLine(pdfFileName);
+                            string genericName = pdfFileName.Split(new[] { '.' })[0].Substring(5);
 
                             bool exists = false;
                             foreach (Issue issue in issues)
                             {
-                                if (issue.CoverURI.Split(new[] { '.' })[0].Equals(pdfFileName.Split(new[] { '.' })[0])) //This condition checks if there is already an issue object with the same filename but for the cover, rather than the pdf
+                                if (issue.GenericFileName.Equals(genericName)) //This condition checks if there is already an issue object with the same filename but for the cover, rather than the pdf
                                 {
+                                    issue.IssueName = issueName;
                                     issue.PdfURL = pdfurl;
                                     issue.PdfURI = pdfFileName;
                                     exists = true;
@@ -99,13 +105,13 @@ namespace HegeApp.Controllers
 
                             if (!exists)
                             {
-                                issues.Add(new Issue(issueName, "", "", false, pdfurl, pdfFileName, false));
+                                issues.Add(new Issue(issueName, genericName, "", "", "", false, pdfurl, pdfFileName, "", false));
                             }
                         }
                     }
 
                     Console.WriteLine("I am groot");
-                    foreach (Match match in t.Matches(html))
+                    foreach (Match match in srcRegex.Matches(html))
                     {
                         string pngurl = match.Groups[1].Value;
                         if (pngurl.Contains("cover"))
@@ -113,51 +119,50 @@ namespace HegeApp.Controllers
                             Console.WriteLine(pngurl);
                             string[] elements = pngurl.Split(new[] { '/', '?' });
                             string pngFileName = elements[elements.Length - 2];
-                            System.Console.WriteLine(pngFileName);
+                            string genericName = pngFileName.Split(new[] { '.' })[0].Substring(5);
+                            Console.WriteLine("This is the png file name and generic name " + pngFileName + " " + genericName);
+
+                            bool exists = false;
+                            foreach (Issue issue in issues)
+                            {
+                                if (issue.GenericFileName.Equals(genericName)) //This condition checks if there is already an issue object with the same filename but for the cover, rather than the pdf
+                                {
+                                    issue.CoverURL = pngurl;
+                                    issue.CoverURI = pngFileName;
+                                    exists = true;
+                                }
+                            }
+
+                            if (!exists)
+                            {
+                                issues.Add(new Issue("", genericName, pngurl, pngFileName, "", false, "", "", "", false));
+                            }
                         }
                     }
-
-
-
-
-
-
-
-                    //if (url.Contains("pdf"))
-                    //{
-                    //    ret.Add(url);
-                    //    names.Add(name);
-                    //    issueList = new List<Issue>();
-
-                    //}
-                    //for (int i = 0; i < ret.Count; i++)
-                    //    {
-
-                    //    //for (int j = 0; j < issueList.Count; j++){
-                    //    //    if(issueList[j].IssueName.Equals(text)){
-
-
-                    //    //    }
-                    //    //}
-
-
-
-                    //        issueList.Add(new Issue(names[i], "", "", false, ret[i] , "", false));
-
-                    //    }
-
-
-
-
-
-
-                    //
-
-
-
                 }
-
             }
+
+            //A quick sanity check to make sure we are returning good issues
+            List<Issue> throwAway = new List<Issue>();
+            foreach (Issue issue in issues)
+            {
+                if (issue.CoverURL.Equals("") | issue.PdfURL.Equals(""))
+                {
+                    throwAway.Add(issue);
+                    Console.WriteLine("I am about to throw this issue away for a missing url: " + issue);
+                }
+                else
+                {
+                    Console.WriteLine("I kept this issue: " + issue);
+                }
+            }
+
+            foreach (Issue issue in throwAway)
+            {
+                issues.Remove(issue);
+            }
+
+            return issues;
         }
 
 
@@ -241,9 +246,16 @@ namespace HegeApp.Controllers
                         hack++;
                     }
                     //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
-                    Issue CreatedIssue = new Issue(elements[0].ToString(), elements[1].ToString(), elements[2].ToString(),
-                                                   ToBool(elements[3].ToString()), elements[4].ToString(), elements[5].ToString(),
-                                                   ToBool(elements[6].ToString()));
+                    Issue CreatedIssue = new Issue(elements[0].ToString(),
+                                                    elements[1].ToString(),
+                                                    elements[2].ToString(),
+                                                    elements[3].ToString(),
+                                                    elements[4].ToString(),
+                                                    ToBool(elements[5].ToString()), 
+                                                    elements[6].ToString(),
+                                                    elements[7].ToString(),
+                                                    elements[8].ToString(),
+                                                    ToBool(elements[9].ToString()));
                     Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
                     newList.Add(CreatedIssue);
                 }
