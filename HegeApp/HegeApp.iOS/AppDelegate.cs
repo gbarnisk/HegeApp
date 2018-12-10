@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Foundation;
 using ObjCRuntime;
 using Plugin.DownloadManager;
@@ -30,41 +31,50 @@ namespace HegeApp.iOS
             UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => {
                 // Handle approval
 
+                //                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                //                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+                //);
+                //app.RegisterUserNotificationSettings(notificationSettings);
 
-                //if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-                //{
-                //    var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                //        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-                //    );
+                //UILocalNotification notification = new UILocalNotification();
+                //NSDate.FromTimeIntervalSinceNow(5);
+                //notification.AlertAction = "Hege Time!!";
+                //notification.AlertBody = "You have a new isuue!";
+                //UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+                //notification.ApplicationIconBadgeNumber = 1;
+                //notification.SoundName = UILocalNotification.DefaultSoundName;
+                //UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
 
-                //    app.RegisterUserNotificationSettings(notificationSettings);
-                //}
-
-                // check for a notification
+                //check for a notification
 
                 //if (options != null)
                 //{
-                //    // check for a local notification
-                //    if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                //// check for a local notification
+                //if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                //{
+                //    var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+                //    if (localNotification != null)
                 //    {
-                //        var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
-                //        if (localNotification != null)
-                //        {
-                //            UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
-                //            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                //        UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
+                //        okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-                //            Window.RootViewController.PresentViewController(okayAlertController, true, null);
+                //        Window.RootViewController.PresentViewController(okayAlertController, true, null);
 
-                //            // reset our badge
-                //            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
-                //        }
+                //        // reset our badge
+                //        UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
                 //    }
                 //}
+                //    }
 
-            });
-            
-            return base.FinishedLaunching(app, options);
-        }
+                });
+
+
+
+                return base.FinishedLaunching(app, options);
+
+
+            }
+ 
 
         /*
          * Based on code from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager 
@@ -76,16 +86,58 @@ namespace HegeApp.iOS
         }
 
 
-        //public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
-        //{
-        //    // show an alert
-        //    UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
-        //    okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
+            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-        //    UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
+            UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
 
-        //    // reset our badge
-        //    UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
-        //}
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+        }
+        public override void DidEnterBackground(UIApplication app)
+        {
+            Console.WriteLine("App entering background state.");
+
+            nint taskID = 0;
+            // if you're creating a VOIP application, this is how you set the keep alive
+            //UIApplication.SharedApplication.SetKeepAliveTimout(600, () => { /* keep alive handler code*/ });
+
+            // register a long running task, and then start it on a new thread so that this method can return
+            taskID = UIApplication.SharedApplication.BeginBackgroundTask(() => {
+                Console.WriteLine("Running out of time to complete you background task!");
+                UIApplication.SharedApplication.EndBackgroundTask(taskID);
+            });
+            Task.Factory.StartNew(() => FinishLongRunningTask(taskID));
+        }
+
+        private void FinishLongRunningTask(nint taskID)
+        {
+            Console.WriteLine("Starting task {0}", taskID);
+            Console.WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
+
+          
+
+            Console.WriteLine("Task {0} finished", taskID);
+            Console.WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
+
+           
+
+            // call our end task
+            UIApplication.SharedApplication.EndBackgroundTask(taskID);
+          
+        }
+
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+        {
+  // Check for new data, and display it
+
+  
+  // Inform system of fetch results
+  completionHandler(UIBackgroundFetchResult.NewData);
+        }
     }
 }
+
