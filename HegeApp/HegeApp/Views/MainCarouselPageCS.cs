@@ -19,8 +19,6 @@ namespace HegeApp.Views
             {
                 CustomButton viewButton = new CustomButton
                 {
-                    //pdfURI = App.issueManager.issueList[i].PdfURI, //The button holds the pdf uri to pass to the pdf view page
-                    //Issue = App.issueManager.issueList[i],
                     Index = i,
                     Text = App.issueManager.issueList[i].IssueName,
                     BackgroundColor = Color.LightGray,
@@ -43,9 +41,11 @@ namespace HegeApp.Views
                 };
                 downloadButton.Clicked += DownloadClicked;
 
-                Label testlabel = new Label
+                Image cover = new Image
                 {
-                    Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                    Source = new Uri(App.issueManager.issueList[i].CoverURL),
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
                 Children.Add(
@@ -58,15 +58,9 @@ namespace HegeApp.Views
                             VerticalOptions = LayoutOptions.Fill,
                             Children =
                             {
-                                new Image
-                                {
-                                    Source = App.issueManager.issueList[i].CoverPath,
-                                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                                    VerticalOptions = LayoutOptions.FillAndExpand
-                                }, //There is an issue with android which is causing crashes when images are loaded.
+                                cover,
                                 viewButton,
                                 downloadButton,
-                                //testlabel
                             }
                         }
                     }

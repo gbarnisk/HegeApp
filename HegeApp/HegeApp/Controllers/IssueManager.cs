@@ -8,8 +8,6 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 
 /*
  * Controls the issue objects. Handles indexing and loading issues on app startup.
@@ -68,10 +66,8 @@ namespace HegeApp.Controllers
                 {
                     string html = sr.ReadToEnd();
 
-                    Regex hrefRegex = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
-                    //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>(?<value>.*?)>");
-                    //Regex t = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>>");
-                    Regex srcRegex = new Regex("<img.+?src=[\"'](.+?)[\"'].*?>");
+                    Regex hrefRegex = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>"); //This matches all of the pdf links
+                    Regex srcRegex = new Regex("<img.+?src=[\"'](.+?)[\"'].*?>"); //This matches all of the image links
 
                     foreach (Match match in hrefRegex.Matches(html))
                     {
@@ -105,7 +101,7 @@ namespace HegeApp.Controllers
 
                             if (!exists)
                             {
-                                issues.Add(new Issue(issueName, genericName, "", "", "", false, pdfurl, pdfFileName, "", false));
+                                issues.Add(new Issue(issueName, genericName, "", pdfurl, pdfFileName, "", false));
                             }
                         }
                     }
@@ -118,7 +114,7 @@ namespace HegeApp.Controllers
                         {
                             Console.WriteLine(pngurl);
                             string[] elements = pngurl.Split(new[] { '/', '?' });
-                            string pngFileName = elements[elements.Length - 2];
+                            string pngFileName = elements[elements.Length - 2]; //No longer needed but kept for the next line's readability
                             string genericName = pngFileName.Split(new[] { '.' })[0].Substring(5);
                             Console.WriteLine("This is the png file name and generic name " + pngFileName + " " + genericName);
 
@@ -128,14 +124,13 @@ namespace HegeApp.Controllers
                                 if (issue.GenericFileName.Equals(genericName)) //This condition checks if there is already an issue object with the same filename but for the cover, rather than the pdf
                                 {
                                     issue.CoverURL = pngurl;
-                                    issue.CoverURI = pngFileName;
                                     exists = true;
                                 }
                             }
 
                             if (!exists)
                             {
-                                issues.Add(new Issue("", genericName, pngurl, pngFileName, "", false, "", "", "", false));
+                                issues.Add(new Issue("", genericName, pngurl, "", "", "", false));
                             }
                         }
                     }
@@ -169,8 +164,8 @@ namespace HegeApp.Controllers
 
 
         /*
- * Saves an object into a textfile at a specified path
- */
+        * Saves an object into a textfile at a specified path. Saves in a csv format, with issues separated by lines.
+        */
         public void SaveToLocal(List<Issue> issues, string filename)
         {
             //Console.WriteLine("Saved to local started");
@@ -210,10 +205,9 @@ namespace HegeApp.Controllers
             }
             return content;
         }
+
         /*
-         * reads a text file at a specified path and returns the content
-         * in the form of a list of issues
-         * Once IssueListFromString is completed, this should work
+         * Reads a text file at a specified path and returns the content in the form of a list of issues
          */
         public List<Issue> ReadFromLocal(string filename)
         {
@@ -225,6 +219,7 @@ namespace HegeApp.Controllers
                 return helloTrello;
             }
         }
+
         /*
          * Given an output string saved in the text file, parses the code and returns it in a list of issues
          */
@@ -251,11 +246,8 @@ namespace HegeApp.Controllers
                                                     elements[2].ToString(),
                                                     elements[3].ToString(),
                                                     elements[4].ToString(),
-                                                    ToBool(elements[5].ToString()), 
-                                                    elements[6].ToString(),
-                                                    elements[7].ToString(),
-                                                    elements[8].ToString(),
-                                                    ToBool(elements[9].ToString()));
+                                                    elements[5].ToString(),
+                                                    ToBool(elements[6].ToString()));
                     Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
                     newList.Add(CreatedIssue);
                 }
@@ -268,7 +260,7 @@ namespace HegeApp.Controllers
 
 
         /*
-         * converts a string back to a boolean
+         * Converts a string back to a boolean
          */
         public Boolean ToBool(string value)
         {
@@ -284,23 +276,12 @@ namespace HegeApp.Controllers
 
         }
         /*
-         * locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
+         * Locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
          */
         public void InitializeTextFile(List<Issue> issues)
         {
             Console.WriteLine(issues);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            //string path;
-            //if (Device.RuntimePlatform == Device.Android)
-            //{
-            //    path = "/android_asset/Content/";
-            //} else if (Device.RuntimePlatform == Device.iOS)
-            //{
-            //    path = "/Content/";
-            //} else
-            //{
-            //    path = "";
-            //}
             string filename = Path.Combine(path, "IssueListStorage.txt");
             File.Create(filename).Dispose();
             Console.WriteLine("Hey you idiot; this is the filename" + filename);
@@ -309,6 +290,7 @@ namespace HegeApp.Controllers
             SaveToLocal(issues, filename);
 
         }
+
         /*
          * Downloads the issue from index into local storage. Using code from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager and https://stackoverflow.com/questions/43008813/xamarin-crossdownloadmanager-waiting-for-download-file
          */
@@ -332,30 +314,6 @@ namespace HegeApp.Controllers
                 {
                     issueList[index].PdfLocal = true;
                     issueList[index].PdfPath = pdf.DestinationPathName;
-                }
-            });
-        }
-
-        /*
-         * Downloads the cover of the issue from the index to a local location.
-         */
-        public async Task DownloadCoverAsync(int index)
-        {
-            await Task.Run(async () =>
-            {
-                IDownloadFile cover = downloadManager.CreateDownloadFile(issueList[index].CoverURL);
-                downloadManager.Start(cover);
-                bool isDownloading = true;
-                while (isDownloading)
-                {
-                    await Task.Delay(2 * 1000);
-                    isDownloading = IsDownloading(cover);
-                }
-
-                if (cover.Status == DownloadFileStatus.COMPLETED)
-                {
-                    issueList[index].CoverLocal = true;
-                    issueList[index].CoverPath = cover.DestinationPathName;
                 }
             });
         }
