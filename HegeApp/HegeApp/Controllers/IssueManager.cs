@@ -25,20 +25,11 @@ namespace HegeApp.Controllers
         public IssueManager()
         {
             downloadManager = CrossDownloadManager.Current;
-
             issueList = IndexToDrive();
-            //issueList.Sort();
+            issueList.Sort();
             InitializeToRAM();
-            //foreach (Issue thingamabob in issueList)
-            //{
-            //    Console.WriteLine("I hate app" + thingamabob.ToString());
-            //}
             InitializeTextFile(issueList);
             List<Issue> thing = ReadFromLocal(filePath);
-            //foreach (Issue thing3 in thing)
-            //{
-            //    Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
-            //}
         }
 
         /*
@@ -48,13 +39,10 @@ namespace HegeApp.Controllers
         {
 
         }
-        //  }
+
         /*
          * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
          */
-
-
-
         public List<Issue> IndexToDrive()
         {
 
@@ -168,27 +156,20 @@ namespace HegeApp.Controllers
         * Saves an object into a textfile at a specified path. Saves in a csv format, with issues separated by lines.
         */
         public void SaveToLocal(List<Issue> issues, string filename)
-        {
-            //Console.WriteLine("Saved to local started");
+        { 
             string currentText = ReadForText(filename);
-            Console.Write("Current = " + currentText);
-
             using (var streamWriter = new StreamWriter(filename, true))
             {
 
                 foreach (Issue iss in issues)
                 {
                     string stringOfIssue = iss.ToString();
-                    //TODO: hey Trevor!!!
+                    //TODO: hey Trever!!!
                     if (!currentText.Contains(stringOfIssue))
                     {
                         streamWriter.WriteLine(iss);
-                        Console.WriteLine("There is a new Issue that is: " + iss.ToString());
                     }
                 }
-
-                //Console.WriteLine(issues);
-                //streamWriter.Write(issues);
                 streamWriter.Close();
             }
 
@@ -226,10 +207,8 @@ namespace HegeApp.Controllers
          */
         public List<Issue> IssueListFromString(String issuelis1)
         {
-            //Console.Write(issuelist);
             List<Issue> newList = new List<Issue>();
             string[] result = issuelis1.Split(new[] { '\r', '\n' });
-            Console.WriteLine();
             foreach (String thing in result)
             {
                 if (!thing.Equals(""))
@@ -238,10 +217,8 @@ namespace HegeApp.Controllers
                     int hack = 0;
                     foreach (String part in elements)
                     {
-                        //Console.WriteLine("WILL'S DEBUGGER" + part);
                         hack++;
                     }
-                    //Console.WriteLine(partIssue[2] + "WOO! It's happening now");
                     Issue CreatedIssue = new Issue(elements[0].ToString(),
                                                     elements[1].ToString(),
                                                     elements[2].ToString(),
@@ -249,7 +226,7 @@ namespace HegeApp.Controllers
                                                     elements[4].ToString(),
                                                     elements[5].ToString(),
                                                     ToBool(elements[6].ToString()));
-                    Console.WriteLine("It's happening!!! ToString is: " + CreatedIssue.ToString());
+            
                     newList.Add(CreatedIssue);
                 }
 
@@ -281,15 +258,11 @@ namespace HegeApp.Controllers
          */
         public void InitializeTextFile(List<Issue> issues)
         {
-            Console.WriteLine(issues);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string filename = Path.Combine(path, "IssueListStorage.txt");
             File.Create(filename).Dispose();
-            Console.WriteLine("Hey you idiot; this is the filename" + filename);
-            Console.WriteLine("im loving this" + File.Exists(filename));
             filePath = filename;
             SaveToLocal(issues, filename);
-
         }
 
         /*
