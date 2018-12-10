@@ -3,6 +3,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace HegeApp.Models
 {
@@ -50,7 +51,7 @@ namespace HegeApp.Models
         {
             if (obj == null)
             {
-                return 1;
+                return 0;
             }
 
             Issue other = obj as Issue;
@@ -59,30 +60,69 @@ namespace HegeApp.Models
             int volumeNum = getVolumeNum();
             int issueNum = getIssueNum();
 
+            if (other.Equals(this))
+            {
+                Console.WriteLine("It's equal");
+                return 0;
+            }
+
             if (volumeNum > otherVolumeNum)
             {
+                Console.WriteLine("It's more than other");
                 return -1;
-            } else if (volumeNum == otherVolumeNum)
+            } 
+            else if (volumeNum == otherVolumeNum)
             {
                 if (issueNum > otherIssueNum)
                 {
+                    Console.WriteLine("It's more than other");
                     return -1;
                 }
             }
+
+            Console.WriteLine("It's less than other");
             return 1;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is Issue objAsIssue)) return false;
+            return Equals((Issue)obj);
+        }
+
+        /* 
+         * Determines if two issues are equal, based on their volume
+         */
+
+        public bool Equals (Issue Iss)
+        {
+            int IssIssNum = Iss.getIssueNum();
+            int IssVolNum = Iss.getVolumeNum();
+            //Console.WriteLine("push notification" + IssIssNum);
+            //Console.WriteLine("things should work" + IssVolNum);
+            return getIssueNum() == IssIssNum && getVolumeNum() == IssVolNum;
         }
 
         public int getVolumeNum()
         {
-            string volumeString = GenericFileName.Split(new[] { 'v', '_' })[0];
-            Console.WriteLine("getVolume was called and is about to return " + volumeString);
+            Console.WriteLine("Griffin sucks" + GenericFileName);
+            //return (numbers[0]);
+            foreach (string thing in GenericFileName.Split(new[] { 'v', '_' })){
+                Console.WriteLine("woo!"+ thing);
+            }
+            string volumeString = GenericFileName.Split(new[] { 'v', '_' })[1];
+            //int test = Convert.ToInt32(volumeString);
+            //Console.WriteLine(test);
+            Console.WriteLine("getVolume was called and is about to return :" + volumeString);
+
             return Convert.ToInt32(volumeString);
         }
 
         public int getIssueNum()
         {
-            string issueString = GenericFileName.Split(new[] { 'i'})[1];
-            Console.WriteLine("getIssue was called and is about to return " + issueString);
+            string issueString = GenericFileName.Split(new[] { 'i'})[2];
+            Console.WriteLine("getIssue was called and is about to return :" + issueString);
             return Convert.ToInt32(issueString);
         }
     }

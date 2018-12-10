@@ -27,17 +27,18 @@ namespace HegeApp.Controllers
             downloadManager = CrossDownloadManager.Current;
 
             issueList = IndexToDrive();
+            //issueList.Sort();
             InitializeToRAM();
-            foreach (Issue thingamabob in issueList)
-            {
-                Console.WriteLine("I hate app" + thingamabob.ToString());
-            }
+            //foreach (Issue thingamabob in issueList)
+            //{
+            //    Console.WriteLine("I hate app" + thingamabob.ToString());
+            //}
             InitializeTextFile(issueList);
             List<Issue> thing = ReadFromLocal(filePath);
-            foreach (Issue thing3 in thing)
-            {
-                Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
-            }
+            //foreach (Issue thing3 in thing)
+            //{
+            //    Console.WriteLine("medium codebase contributor my ass. " + thing3.ToString());
+            //}
         }
 
         /*
