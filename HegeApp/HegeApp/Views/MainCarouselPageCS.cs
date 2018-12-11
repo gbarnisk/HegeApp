@@ -1,4 +1,5 @@
-﻿using HegeApp.Controllers;
+﻿using Acr.UserDialogs;
+using HegeApp.Controllers;
 using HegeApp.Models;
 using System;
 using System.Collections.Generic;
@@ -27,19 +28,7 @@ namespace HegeApp.Views
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center
                 };
-                viewButton.Clicked += ViewClicked;
-
-                Button downloadButton = new CustomButton
-                {
-                    Text = "Download",
-                    Index = i,
-                    BackgroundColor = Color.LightBlue,
-                    BorderWidth = 2,
-                    BorderColor = Color.Black,
-                    HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
-                };
-                downloadButton.Clicked += DownloadClicked;
+                viewButton.Clicked += ButtonClicked;
 
                 Image cover = new Image
                 {
@@ -59,8 +48,7 @@ namespace HegeApp.Views
                             Children =
                             {
                                 cover,
-                                viewButton,
-                                downloadButton,
+                                viewButton
                             }
                         }
                     }
@@ -68,21 +56,22 @@ namespace HegeApp.Views
             }
         }
 
-        //When the view button is clicked, get the button's uri and load that
-        private void ViewClicked(object sender, EventArgs e)
-        {
-            CustomButton hackButton = (CustomButton)sender; //Yes there is a better way. I don't feel like learning how to do it.
-            Navigation.PushModalAsync(new PDFViewPageCS(/*hackButton.pdfURI, hackButton.Issue, */hackButton.Index));
-        }
-
         /*
-         * Downloads the issue into local memory when clicked
+         * Open/download button clicked method. When clicked, it will either download the issue and then open it, if it is not already saved locally, or open it directly, if it is saved.
          */
-        private void DownloadClicked(object sender, EventArgs e)
+        private async void ButtonClicked(object sender, EventArgs e)
         {
-            System.Console.WriteLine("GRIFFIN'S DEBUG Download button clicked");
-            CustomButton hackButton = (CustomButton)sender;
-            App.issueManager.DownloadIssueAsync(hackButton.Index);
+            CustomButton button = (CustomButton)sender;
+            int index = button.Index;
+            if (!App.issueManager.issueList[index].PdfLocal) //It's not saved locally
+            {
+                using (UserDialogs.Instance.Loading("Downloading issue..."))
+                {
+                    await App.issueManager.DownloadIssueAsync(index);
+                }
+            }
+
+            Navigation.PushModalAsync(new PDFViewPageCS(index));
         }
     }
 }

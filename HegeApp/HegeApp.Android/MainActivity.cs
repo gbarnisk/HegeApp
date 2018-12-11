@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -21,6 +22,8 @@ namespace HegeApp.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            UserDialogs.Init(this);
 
             var alarmIntent = new Intent(this, typeof(BackgroundReceiver));
             var pending = PendingIntent.GetBroadcast(this, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
