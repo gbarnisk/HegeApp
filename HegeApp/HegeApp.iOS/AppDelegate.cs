@@ -8,6 +8,8 @@ using ObjCRuntime;
 using Plugin.DownloadManager;
 using UIKit;
 using UserNotifications;
+using static System.Console;
+
 namespace HegeApp.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -16,6 +18,8 @@ namespace HegeApp.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+
+
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
         // method you should instantiate the window, load the UI into it and then make the window
@@ -27,50 +31,21 @@ namespace HegeApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            // Request notification permissions from the user
-            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => {
-                // Handle approval
 
-                //                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                //                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-                //);
-                //app.RegisterUserNotificationSettings(notificationSettings);
+            var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+);
+            app.RegisterUserNotificationSettings(notificationSettings);
 
-                //UILocalNotification notification = new UILocalNotification();
-                //NSDate.FromTimeIntervalSinceNow(5);
-                //notification.AlertAction = "Hege Time!!";
-                //notification.AlertBody = "You have a new isuue!";
-                //UIApplication.SharedApplication.ScheduleLocalNotification(notification);
-                //notification.ApplicationIconBadgeNumber = 1;
-                //notification.SoundName = UILocalNotification.DefaultSoundName;
-                //UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
-
-                //check for a notification
-
-                //if (options != null)
-                //{
-                //// check for a local notification
-                //if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
-                //{
-                //    var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
-                //    if (localNotification != null)
-                //    {
-                //        UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
-                //        okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-
-                //        Window.RootViewController.PresentViewController(okayAlertController, true, null);
-
-                //        // reset our badge
-                //        UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
-                //    }
-                //}
-                //    }
-
-                });
+            UILocalNotification notification = new UILocalNotification();
+            NSDate.FromTimeIntervalSinceNow(30);
+            notification.AlertAction = "New Hege Issue!";
+            notification.AlertBody = "!!!!!!!!!!!!!!!!!!";
+            UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+           
 
 
-
-                return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(app, options);
 
 
             }
@@ -86,20 +61,9 @@ namespace HegeApp.iOS
         }
 
 
-        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
-        {
-            // show an alert
-            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
-            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-
-            UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
-
-            // reset our badge
-            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
-        }
         public override void DidEnterBackground(UIApplication app)
         {
-            Console.WriteLine("App entering background state.");
+            WriteLine("App entering background state.");
 
             nint taskID = 0;
             // if you're creating a VOIP application, this is how you set the keep alive
@@ -107,21 +71,32 @@ namespace HegeApp.iOS
 
             // register a long running task, and then start it on a new thread so that this method can return
             taskID = UIApplication.SharedApplication.BeginBackgroundTask(() => {
-                Console.WriteLine("Running out of time to complete you background task!");
+                WriteLine("Running out of time to complete you background task!");
                 UIApplication.SharedApplication.EndBackgroundTask(taskID);
             });
             Task.Factory.StartNew(() => FinishLongRunningTask(taskID));
         }
 
+
+        //public override void PerformFetch(UIApplication app, Action<UIBackgroundFetchResult> completionHandler)
+        //{
+        //    WriteLine("GFHFJHGJF");
+        //    // Inform system of fetch results
+        //    completionHandler(UIBackgroundFetchResult.NewData);
+        //}
+
         private void FinishLongRunningTask(nint taskID)
         {
-            Console.WriteLine("Starting task {0}", taskID);
-            Console.WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
-
-          
-
-            Console.WriteLine("Task {0} finished", taskID);
-            Console.WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
+            WriteLine("Starting task {0}", taskID);
+            WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
+            Console.WriteLine("Almost");
+            //UILocalNotification notification = new UILocalNotification();
+            //NSDate.FromTimeIntervalSinceNow(30);
+            //notification.AlertAction = "New Hege Issue!";
+            //notification.AlertBody = "!!!!!!!!!!!!!!!!!!";
+            //UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+            //WriteLine("Task {0} finished", taskID);
+            WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
 
            
 
@@ -130,14 +105,21 @@ namespace HegeApp.iOS
           
         }
 
-        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
-        {
-  // Check for new data, and display it
-
+       
   
-  // Inform system of fetch results
-  completionHandler(UIBackgroundFetchResult.NewData);
-        }
+
+
+
     }
+
+
+
+
+
+
+
+
+   
+
 }
 
