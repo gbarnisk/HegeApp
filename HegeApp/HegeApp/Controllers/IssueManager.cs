@@ -19,31 +19,71 @@ namespace HegeApp.Controllers
     {
         public List<Issue> issueList { get; set; }
         private IDownloadManager downloadManager;
-        public string filePath = "";
         public List<Issue> finalList { get; set; }
+        string filename;
 
         public IssueManager()
         {
             downloadManager = CrossDownloadManager.Current;
-            issueList = IndexToDrive();
-            issueList.Sort();
-            InitializeToRAM();
-            InitializeTextFile(issueList);
-            List<Issue> thing = ReadFromLocal(filePath);
+            filename = FindPath();
+
+            if (!File.Exists(filename))
+            {
+                InitializeTextFile(filename);
+            }
+
+            //Get the right issue list
+            issueList = InitializeToRAM();
+
+            //Mirror that issue list into the local save state
+            SaveToLocal(issueList, filename);
         }
 
         /*
-         * Loads issues from the hard drive metadata into a list stored in RAM.
+         * Returns the correctly constructed list, based on the host and the locally saved data.
          */
-        public void InitializeToRAM()
+        public List<Issue> InitializeToRAM()
         {
+            List<Issue> finalList = new List<Issue>();
+            List<Issue> indexedList = HostToArray();
+            List<Issue> localList = ReadFromLocal(filename);
 
+            //First, copy every issue from localList into finalList
+            foreach (Issue issue in localList)
+            {
+                finalList.Add(issue);
+                Console.WriteLine("I just added this issue to the final list from local: " + issue);
+            }
+
+            //Then, delete all of the issues which have since been deleted, and are not in indexedList
+            List<Issue> toDelete = new List<Issue>();
+            foreach (Issue issue in NewIssues(localList, indexedList))
+            {
+                toDelete.Add(issue);
+                Console.WriteLine("I just deleted this issue to the final list for being missing in the index: " + issue);
+            }
+
+            foreach (Issue issue in toDelete)
+            {
+                finalList.Remove(issue);
+            }
+
+            //Finally, add in all of the new issues in indexedList but not in localList
+            foreach (Issue issue in NewIssues(indexedList, localList))
+            {
+                finalList.Add(issue);
+                Console.WriteLine("I just added this issue to the final list from index: " + issue);
+            }
+
+            finalList.Sort(); //Make sure to sort the list before returning so it shows in chronological order
+
+            return finalList;
         }
 
         /*
-         * Indexes all issues from the file host and saves the relevant metadata to the hard drive.
+         * Indexes all issues from the filehost, a post on wordpress, and returns them as an array.
          */
-        public List<Issue> IndexToDrive()
+        public List<Issue> HostToArray()
         {
 
             List<Issue> issues = new List<Issue>();
@@ -149,14 +189,12 @@ namespace HegeApp.Controllers
             return issues;
         }
 
-
-
-
         /*
         * Saves an object into a textfile at a specified path. Saves in a csv format, with issues separated by lines.
         */
         public void SaveToLocal(List<Issue> issues, string filename)
-        { 
+        {
+            InitializeTextFile(filename);
             string currentText = ReadForText(filename);
             using (var streamWriter = new StreamWriter(filename, true))
             {
@@ -195,7 +233,6 @@ namespace HegeApp.Controllers
         {
             using (var streamReader = new StreamReader(filename))
             {
-
                 string content = streamReader.ReadToEnd();
                 List<Issue> helloTrello = IssueListFromString(content);
                 return helloTrello;
@@ -254,15 +291,22 @@ namespace HegeApp.Controllers
 
         }
         /*
-         * Locates the correct file path, and uses SaveToLocal to save a given list of issues to a text file
+         * Creates an empty file at filename.
          */
-        public void InitializeTextFile(List<Issue> issues)
+        public void InitializeTextFile(string filename)
+        {
+            File.Create(filename).Dispose();
+            Console.WriteLine("I just created a file with name " + filename);
+        }
+
+        /*
+         * Locates and returns the correct file path for the local save state.
+         */
+        public string FindPath()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string filename = Path.Combine(path, "IssueListStorage.txt");
-            File.Create(filename).Dispose();
-            filePath = filename;
-            SaveToLocal(issues, filename);
+            return filename;
         }
 
         /*
@@ -321,6 +365,32 @@ namespace HegeApp.Controllers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /*
+         * Returns every issue in newList, paramater 1, which is not in oldList, parameter 2. It determines issue overlap by checking the generic names.
+         */
+        private List<Issue> NewIssues(List<Issue> newList, List<Issue> oldList)
+        {
+            List<Issue> finalList = new List<Issue>();
+
+            foreach (Issue newIssue in newList)
+            {
+                bool found = false;
+                foreach (Issue oldIssue in oldList)
+                {
+                    if (newIssue.GenericFileName.Equals(oldIssue.GenericFileName))
+                    {
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    finalList.Add(newIssue);
+                }
+            }
+
+            return finalList;
         }
     }
 }
