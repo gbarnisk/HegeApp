@@ -3,17 +3,14 @@ using System;
 using Xamarin.Forms;
 
 /*
- * A programatic alternative to PDFViewPage.
- */
+* Takes an index and constructs a pdf web view page accessing the issueManager's list of that index.
+*/
 
 namespace HegeApp.Views
 {
     class PDFViewPageCS : ContentPage
     {
-        /*
-         * Takes a file name (uri) and constructs a pdf web view page accessing that file.
-         */
-        public PDFViewPageCS(/*string uri, Issue issue, */int index)
+        public PDFViewPageCS(int index)
         {
             Button dismissModal = new Button
             {
@@ -25,19 +22,21 @@ namespace HegeApp.Views
 
             dismissModal.Clicked += DismissModal_Clicked;
 
-            Padding = new Thickness(0, 20, 0, 10);
+            if (Device.RuntimePlatform.Equals(Device.iOS))
+            {
+                Padding = new Thickness(10, 10, 10, 10);
+            }
+            else if (Device.RuntimePlatform.Equals(Device.Android))
+            {
+                Padding = new Thickness(0, 0, 0, 0);
+            }
+
             Content = new StackLayout
             {
                 Children =
                 {
-                    //new Label
-                    //{
-                    //   Text = uri
-                    //},
                     new CustomWebView
                     {
-                        //Uri = uri,
-                        //Issue = issue,
                         Index = index,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.FillAndExpand

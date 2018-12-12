@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 
 /*
- * A C# port of MainCarouselPage.xaml. Made to test the functionality of Issue objects.
+ * A carousel of pages with a issue image and view button on them. Pages are swiped left and right to find the correct issue. The view button opens the issue in PDFViewPageCS
  */
 
 namespace HegeApp.Views
@@ -22,13 +22,11 @@ namespace HegeApp.Views
                 {
                     Index = i,
                     Text = App.issueManager.issueList[i].IssueName,
-                    BackgroundColor = Color.LightGray,
-                    BorderWidth = 2,
-                    BorderColor = Color.Black,
                     HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
+                    VerticalOptions = LayoutOptions.Start,
                 };
                 viewButton.Clicked += ButtonClicked;
+                
 
                 Image cover = new Image
                 {
@@ -37,22 +35,29 @@ namespace HegeApp.Views
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
-                Children.Add(
-                    new ContentPage
+                ContentPage singleSlide = new ContentPage
+                {
+                    Content = new StackLayout
                     {
-                        Padding = new Thickness(0, 20, 0, 0),
-                        Content = new StackLayout
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        Children =
                         {
-                            HorizontalOptions = LayoutOptions.Fill,
-                            VerticalOptions = LayoutOptions.Fill,
-                            Children =
-                            {
-                                cover,
-                                viewButton
-                            }
+                            cover, viewButton
                         }
                     }
-                );
+                };
+
+                if (Device.RuntimePlatform.Equals(Device.iOS))
+                {
+                    singleSlide.Padding = new Thickness(0, 40, 0, 20);
+                } else if (Device.RuntimePlatform.Equals(Device.Android))
+                {
+                    singleSlide.Padding = new Thickness(0, 20, 0, 20);
+                }
+               
+
+                Children.Add(singleSlide);
             }
         }
 
