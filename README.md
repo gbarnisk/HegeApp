@@ -51,6 +51,8 @@ To zoom in, use the zoom button on the top of the screen
 Save the issue as a PDF using the following format: ISSUEV(x)_I(x).pdf
 Save the cover as a PNG using the following format: COVERV(x)_I(x).png
 
+For example, for volume 18 issue 2, you would name the pdf ISSUEv18_i2.pdf, and the cover COVERv18_i2.png
+
 Upload these files into this link: https://macalesterhegemonocle.wordpress.com/2018/11/13/test/ 
 *(you will have the username and password)*
 
