@@ -6,18 +6,21 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 
 /*
- * A carousel of pages with a issue image and view button on them. Pages are swiped left and right to find the correct issue. The view button opens the issue in PDFViewPageCS
+ * A carousel of pages with a issue image and view button on them. Pages are swiped left and right to find the correct issue. The view button opens the issue in PDFViewPageCS.
  */
 
 namespace HegeApp.Views
 {
     class MainCarouselPageCS : CarouselPage
     {
-
+        /*
+         * Constructs a set of contentpages inside a carousel
+         */
         public MainCarouselPageCS()
         {
             for (int i = 0; i < App.issueManager.issueList.Count; i++)
             {
+                //Open issue button
                 CustomButton viewButton = new CustomButton
                 {
                     Index = i,
@@ -27,7 +30,7 @@ namespace HegeApp.Views
                 };
                 viewButton.Clicked += ButtonClicked;
                 
-
+                //Issue cover image
                 Image cover = new Image
                 {
                     Source = new Uri(App.issueManager.issueList[i].CoverURL),
@@ -35,6 +38,7 @@ namespace HegeApp.Views
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
+                //A single page of the carousel
                 ContentPage singleSlide = new ContentPage
                 {
                     Content = new StackLayout
@@ -48,6 +52,7 @@ namespace HegeApp.Views
                     }
                 };
 
+                //Correctly pads the page
                 if (Device.RuntimePlatform.Equals(Device.iOS))
                 {
                     singleSlide.Padding = new Thickness(0, 40, 0, 20);

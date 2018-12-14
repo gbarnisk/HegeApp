@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 
 /*
  * Shamelessly stolen from https://github.com/xamarin/recipes/tree/master/Recipes/xamarin-forms/Controls/display-pdf
- * A custom pdf renderer for Android.
+ * A custom pdf renderer for Android. Uses Mozilla's pdf.js UI.
  */
 
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]

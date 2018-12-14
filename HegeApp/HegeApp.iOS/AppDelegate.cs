@@ -33,25 +33,12 @@ namespace HegeApp.iOS
             LoadApplication(new App());
             //Asking for push notifications permission
             var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-);
+                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+            );
             app.RegisterUserNotificationSettings(notificationSettings);
 
-            //UILocalNotification notification = new UILocalNotification();
-            //NSDate.FromTimeIntervalSinceNow(15);
-            //notification.AlertAction = "New Hege Issue!";
-            //notification.AlertBody = "!!!!!!!!!!!!!!!!!!";
-            //notification.ApplicationIconBadgeNumber = 1;
-            //notification.SoundName = UILocalNotification.DefaultSoundName;
-            //UIApplication.SharedApplication.ScheduleLocalNotification(notification);
-           // UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
-
-
-
             return base.FinishedLaunching(app, options);
-
-
-            }
+        }
  
 
         /*
@@ -62,65 +49,5 @@ namespace HegeApp.iOS
             base.HandleEventsForBackgroundUrl(application, sessionIdentifier, completionHandler);
             CrossDownloadManager.BackgroundSessionCompletionHandler = completionHandler;
         }
-
-
-        //public override void DidEnterBackground(UIApplication app)
-        //{
-        //    WriteLine("App entering background state.");
-
-        //    nint taskID = 0;
-        //    // register a long running task, and then start it on a new thread so that this method can return
-        //    taskID = UIApplication.SharedApplication.BeginBackgroundTask(() => {
-        //        WriteLine("Running out of time to complete you background task!");
-        //        UIApplication.SharedApplication.EndBackgroundTask(taskID);
-        //    });
-        //    Task.Factory.StartNew(() => FinishLongRunningTask(taskID));
-        //}
-
-
-        //public override void PerformFetch(UIApplication app, Action<UIBackgroundFetchResult> completionHandler)
-        //{
-        //    WriteLine("GFHFJHGJF");
-        //    // Inform system of fetch results
-        //    completionHandler(UIBackgroundFetchResult.NewData);
-        //}
-
-        //private void FinishLongRunningTask(nint taskID)
-        //{
-            //WriteLine("Starting task {0}", taskID);
-            //WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
-            //Console.WriteLine("Almost");
-            //Thread.Sleep(15000);
-            ////UILocalNotification notification = new UILocalNotification();
-            ////NSDate.FromTimeIntervalSinceNow(30);
-            ////notification.AlertAction = "New Hege Issue!";
-            ////notification.AlertBody = "!!!!!!!!!!!!!!!!!!";
-            ////UIApplication.SharedApplication.ScheduleLocalNotification(notification);
-            //WriteLine("Task {0} finished", taskID);
-            //WriteLine("Background time remaining: {0}", UIApplication.SharedApplication.BackgroundTimeRemaining);
-
-           
-
-            // call our end task
-            //UIApplication.SharedApplication.EndBackgroundTask(taskID);
-          
-        }
-
-       
-  
-
-
-
     }
-
-
-
-
-
-
-
-
-   
-
 }
-

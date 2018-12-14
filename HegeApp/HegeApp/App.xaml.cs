@@ -16,14 +16,10 @@ namespace HegeApp
         public App()
         {
             InitializeComponent();
-
-
-            //System.Console.WriteLine("Hello World");
+            
             issueManager = new IssueManager();
-
-            //issueManager.InitializeTextFile(issueList);
-            MainPage = new MainCarouselPageCS(); //Boots to the C# port of the carousel page.
-            //MainPage = new TestPage();
+            
+            MainPage = new MainCarouselPageCS(); //Boots to the issue selection page
         }
 
 
@@ -34,7 +30,8 @@ namespace HegeApp
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            //When app sleeps and closes normally, mirror all of the issues in the ram into the save state, preserving saved paths.
+            issueManager.SaveToLocal(issueManager.issueList, issueManager.filename);
         }
 
         protected override void OnResume()

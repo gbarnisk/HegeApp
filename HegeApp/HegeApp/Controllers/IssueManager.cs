@@ -10,17 +10,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 /*
- * Controls the issue objects. Handles indexing and loading issues on app startup.
+ * Controls the issue objects. Handles indexing and loading issues on app startup, and allows access to the list of issues.
  */
 
 namespace HegeApp.Controllers
 {
     public class IssueManager
     {
-        public List<Issue> issueList { get; set; }
+        public List<Issue> issueList { get; set; } //List of issues to be displayed
         private IDownloadManager downloadManager;
         public List<Issue> finalList { get; set; }
-        string filename;
+        public string filename { get; set; } //File name for the saved metadata
 
         public IssueManager()
         {
@@ -34,9 +34,6 @@ namespace HegeApp.Controllers
 
             //Get the right issue list
             issueList = InitializeToRAM();
-
-            //Mirror that issue list into the local save state
-            SaveToLocal(issueList, filename);
         }
 
         /*
@@ -190,7 +187,7 @@ namespace HegeApp.Controllers
         }
 
         /*
-        * Saves an object into a textfile at a specified path. Saves in a csv format, with issues separated by lines.
+        * Saves a list of issues into a textfile at a specified path. Saves in a csv format, with issues separated by lines.
         */
         public void SaveToLocal(List<Issue> issues, string filename)
         {
@@ -210,9 +207,6 @@ namespace HegeApp.Controllers
                 }
                 streamWriter.Close();
             }
-
-
-
         }
 
         public string ReadForText(string filename)
@@ -271,9 +265,6 @@ namespace HegeApp.Controllers
             return newList;
         }
 
-
-
-
         /*
          * Converts a string back to a boolean
          */
@@ -290,6 +281,7 @@ namespace HegeApp.Controllers
             throw new ArgumentException("neither true nor false");
 
         }
+
         /*
          * Creates an empty file at filename.
          */
@@ -370,7 +362,7 @@ namespace HegeApp.Controllers
         /*
          * Returns every issue in newList, paramater 1, which is not in oldList, parameter 2. It determines issue overlap by checking the generic names.
          */
-        private List<Issue> NewIssues(List<Issue> newList, List<Issue> oldList)
+        public List<Issue> NewIssues(List<Issue> newList, List<Issue> oldList)
         {
             List<Issue> finalList = new List<Issue>();
 

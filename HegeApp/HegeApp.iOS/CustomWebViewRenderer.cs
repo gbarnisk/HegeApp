@@ -33,13 +33,7 @@ namespace HegeApp.iOS
             if (e.NewElement != null)
             {
                 var customWebView = Element as CustomWebView;
-                //string fileName = Path.Combine(NSBundle.MainBundle.BundlePath, string.Format("Content/{0}", WebUtility.UrlEncode(customWebView.Uri)));
-                //string fileName = Path.Combine(NSBundle.MainBundle.BundlePath, string.Format(WebUtility.UrlEncode(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), customWebView.Uri))));
-
-                //string fileName = customWebView.Issue.PdfPath;
                 string filePath = App.issueManager.issueList[customWebView.Index].PdfPath;
-
-
                 System.Console.WriteLine("GRIFFIN'S DEBUG This is the fileName attempted to be opened: " + filePath);
                 System.Console.WriteLine("GRIFFIN'S DEBUG And this is the NSUrl attempted to be opened: " + new NSUrl(filePath, false));
                 Control.LoadRequest(new NSUrlRequest(new NSUrl(filePath, false)));

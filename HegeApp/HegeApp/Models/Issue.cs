@@ -1,9 +1,9 @@
-﻿/*
+﻿using System;
+using System.Collections.Generic;
+
+/*
  * An issue data type. Contains a name, a pdf uri, and a cover art uri.
  */
-
-using System;
-using System.Collections.Generic;
 
 namespace HegeApp.Models
 {

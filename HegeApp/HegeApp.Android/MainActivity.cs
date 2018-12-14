@@ -25,11 +25,6 @@ namespace HegeApp.Droid
 
             UserDialogs.Init(this);
 
-            var alarmIntent = new Intent(this, typeof(BackgroundReceiver));
-            var pending = PendingIntent.GetBroadcast(this, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            var alarmManager = GetSystemService(AlarmService).JavaCast<AlarmManager>();
-            alarmManager.Set(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() + 3 * 1000, pending);
-
             //Following from https://github.com/SimonSimCity/Xamarin-CrossDownloadManager
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
