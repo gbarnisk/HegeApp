@@ -27,7 +27,16 @@ namespace HegeApp.Views
                     Text = App.issueManager.issueList[i].IssueName,
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Start,
+                    FontFamily = "Gill Sans",
+
+
                 };
+                if (Device.RuntimePlatform.Equals(Device.iOS))
+                {
+
+                    viewButton.WidthRequest = 250;
+                    viewButton.BackgroundColor = Color.LightGray;
+                }
                 viewButton.Clicked += ButtonClicked;
                 
                 //Issue cover image
@@ -55,8 +64,9 @@ namespace HegeApp.Views
                 //Correctly pads the page
                 if (Device.RuntimePlatform.Equals(Device.iOS))
                 {
-                    singleSlide.Padding = new Thickness(0, 40, 0, 20);
-                } else if (Device.RuntimePlatform.Equals(Device.Android))
+                    singleSlide.Padding = new Thickness(0, 40, 0, 60);
+                }
+                else if (Device.RuntimePlatform.Equals(Device.Android))
                 {
                     singleSlide.Padding = new Thickness(0, 20, 0, 20);
                 }
