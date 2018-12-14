@@ -29,7 +29,6 @@ namespace HegeApp.Droid
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
                 string fileName = Android.Net.Uri.Parse(file.Url).Path.Split('/').Last();
-                //string newPath = Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
                 string newPath = Path.Combine(Android.App.Application.Context.GetExternalFilesDir(null).AbsolutePath, "Issues", fileName); //From https://kimsereyblog.blogspot.com/2016/11/differences-between-internal-and.html
                 System.Console.WriteLine("GRIFFIN'S DEBUG File path: " + newPath);
                 return newPath;
